@@ -60,7 +60,6 @@ namespace Imager
             this.Record = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.modeComboBox = new System.Windows.Forms.ComboBox();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.communicationButton = new System.Windows.Forms.Button();
             this.deviceButton = new System.Windows.Forms.Button();
@@ -80,7 +79,7 @@ namespace Imager
             this.label1 = new System.Windows.Forms.Label();
             this.connectButton = new System.Windows.Forms.Button();
             this.disconnectButton = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +104,7 @@ namespace Imager
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.MainMenu.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvgBitRate)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -238,13 +237,6 @@ namespace Imager
             this.modeComboBox.Size = new System.Drawing.Size(181, 21);
             this.modeComboBox.TabIndex = 1;
             this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.modeComboBox_SelectedIndexChanged);
-            // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.White;
-            this.imageList.Images.SetKeyName(0, "play.bmp");
-            this.imageList.Images.SetKeyName(1, "stop.bmp");
             // 
             // groupBox2
             // 
@@ -445,17 +437,17 @@ namespace Imager
             this.disconnectButton.UseVisualStyleBackColor = true;
             this.disconnectButton.Click += new System.EventHandler(this.disconnectButton_Click);
             // 
-            // menuStrip1
+            // MainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1022, 24);
-            this.menuStrip1.TabIndex = 4;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(1022, 24);
+            this.MainMenu.TabIndex = 4;
+            this.MainMenu.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -653,9 +645,9 @@ namespace Imager
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.MainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.MainMenu;
             this.MinimumSize = new System.Drawing.Size(846, 512);
             this.Name = "MainForm";
             this.Text = "Imager";
@@ -667,8 +659,8 @@ namespace Imager
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvgBitRate)).EndInit();
@@ -705,10 +697,9 @@ namespace Imager
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button disconnectButton;
-        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.TextBox guidTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;

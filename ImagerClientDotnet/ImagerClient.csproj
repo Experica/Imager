@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ImagerClientDotnet</RootNamespace>
-    <AssemblyName>ImagerClientDotnet</AssemblyName>
+    <RootNamespace>ImagerClient</RootNamespace>
+    <AssemblyName>ImagerClient</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -29,7 +29,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -84,9 +84,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ImagerCommandDotnet\ImagerCommandDotnet.csproj">
+    <ProjectReference Include="..\ImagerCommandDotnet\ImagerCommand.csproj">
       <Project>{085ff4c3-de1d-462d-9fc1-f51a2b44d9bf}</Project>
-      <Name>ImagerCommandDotnet</Name>
+      <Name>ImagerCommand</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

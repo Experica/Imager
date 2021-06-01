@@ -30,7 +30,7 @@ OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImagerClientDotnet.Properties {
+namespace ImagerClient.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

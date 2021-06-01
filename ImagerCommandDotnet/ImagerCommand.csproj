@@ -9,8 +9,8 @@
     <ProjectGuid>{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImagerCommandDotnet</RootNamespace>
-    <AssemblyName>ImagerCommandDotnet</AssemblyName>
+    <RootNamespace>ImagerCommand</RootNamespace>
+    <AssemblyName>ImagerCommand</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -37,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>

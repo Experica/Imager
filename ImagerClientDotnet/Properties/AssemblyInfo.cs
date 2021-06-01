@@ -26,11 +26,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ImagerClientDotnet")]
-[assembly: AssemblyDescription("Client for Imager")]
+[assembly: AssemblyTitle("ImagerClient")]
+[assembly: AssemblyDescription("A .NET Client for Imager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Experica")]
-[assembly: AssemblyProduct("ImagerClientDotnet")]
+[assembly: AssemblyProduct("ImagerClient")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

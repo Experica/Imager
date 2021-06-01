@@ -346,16 +346,14 @@ namespace Imager
                 lUserDefinedName = devinfo.UserDefinedName;
 
                 // GigE Vision specific device attributes
-                PvDeviceInfoGEV lDeviceInfoGEV = devinfo as PvDeviceInfoGEV;
-                if (lDeviceInfoGEV != null)
+                if (devinfo is PvDeviceInfoGEV lDeviceInfoGEV)
                 {
                     lMACAddress = lDeviceInfoGEV.MACAddress;
                     lIPAddress = lDeviceInfoGEV.IPAddress;
                 }
 
                 // USB3 Vision specific device attributes
-                PvDeviceInfoU3V lDeviceInfoU3V = devinfo as PvDeviceInfoU3V;
-                if (lDeviceInfoU3V != null)
+                if (devinfo is PvDeviceInfoU3V lDeviceInfoU3V)
                 {
                     lGUID = lDeviceInfoU3V.DeviceGUID;
                 }

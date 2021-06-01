@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using Ice;
 using Imager;
 
-namespace ImagerCommandDotnet
+namespace ImagerCommand
 {
     public class Command
     {
