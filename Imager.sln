@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imager", "Imager\Imager.csproj", "{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagerCommandDotnet", "ImagerCommandDotnet\ImagerCommandDotnet.csproj", "{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagerClientDotnet", "ImagerClientDotnet\ImagerClientDotnet.csproj", "{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA88970B-EF37-4241-8773-0164D5903E1A}"
+	ProjectSection(SolutionItems) = preProject
+		Imager.sln.licenseheader = Imager.sln.licenseheader
+		ImagerCommand.ice = ImagerCommand.ice
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Debug|x64.ActiveCfg = Debug|x64
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Debug|x64.Build.0 = Debug|x64
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Release|x64.ActiveCfg = Release|x64
+		{DA7577F4-6F3E-4C5C-B567-B577638A3B7B}.Release|x64.Build.0 = Release|x64
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Debug|x64.Build.0 = Debug|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Release|x64.ActiveCfg = Release|Any CPU
+		{085FF4C3-DE1D-462D-9FC1-F51A2B44D9BF}.Release|x64.Build.0 = Release|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFE75FE6-B06E-4EED-A2B1-E0C67908758E}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9070B167-C762-4FB9-9A17-D1335046F170}
+	EndGlobalSection
+EndGlobal
