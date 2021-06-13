@@ -146,6 +146,18 @@ namespace Imager
             config.ServerPort = (ushort)ServerPort.Value;
         }
 
+        void DeviceUpdateFromConfig()
+        {
+            config.ImageFormat.Write(mDevice.Parameters);
+            config.AcquisitionControl.Write(mDevice.Parameters);
+        }
+
+        void DeviceUpdateToConfig()
+        {
+            config.ImageFormat.Read(mDevice.Parameters);
+            config.AcquisitionControl.Read(mDevice.Parameters);
+        }
+
         void SaveConfig(string filepath = configpath)
         {
             filepath.WriteYamlFile(config);
@@ -237,7 +249,12 @@ namespace Imager
                     lDeviceGEV.NegotiatePacketSize();
                     lDeviceGEV.SetStreamDestination(lStreamGEV.LocalIPAddress, lStreamGEV.LocalPort);
                 }
-                mPipeline = new PvPipeline(mStream);
+                DeviceUpdateFromConfig();
+                mPipeline = new PvPipeline(mStream)
+                {
+                    BufferCount = Math.Max(4, config.BufferCount),
+                    HandleBufferTooSmall = config.BufferAutoResize
+                };
             }
             catch (PvException ex)
             {
@@ -292,6 +309,8 @@ namespace Imager
 
             if (mPipeline != null)
             {
+                config.BufferCount = mPipeline.BufferCount;
+                config.BufferAutoResize = mPipeline.HandleBufferTooSmall;
                 mPipeline.Dispose();
                 mPipeline = null;
             }
@@ -307,6 +326,7 @@ namespace Imager
             {
                 if (mDevice.IsConnected)
                 {
+                    DeviceUpdateToConfig();
                     mDevice.OnLinkDisconnected -= OnLinkDisconnected;
                     foreach (PvGenParameter lP in mDevice.Parameters)
                     {
@@ -650,7 +670,7 @@ namespace Imager
 
         string RecordPath()
         {
-            if(!string.IsNullOrEmpty( recorder.RecordPath))
+            if (!string.IsNullOrEmpty(recorder.RecordPath))
             {
                 return recorder.RecordPath;
             }

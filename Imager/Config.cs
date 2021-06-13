@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PvDotNet;
 
 namespace Imager
 {
@@ -37,5 +38,112 @@ namespace Imager
         public bool EnableServer { get; set; } = false;
         public string ServerAddress { get; set; } = "LocalHost";
         public ushort ServerPort { get; set; } = 10000;
+        /// <summary>
+        /// Increasing the buffer count can make streaming more tolerant to missing block IDs, 
+        /// but at the expense of using more memory and increasing latency.
+        /// Using more than 16 buffers is typically used in high frame rate, small buffer size applications.
+        /// Applications using low frame rates or using very large buffers are not as sensitive to missing block IDs and 
+        /// can thus save memory and latency by only using 4 or 8 buffers.
+        /// </summary>
+        public uint BufferCount { get; set; } = 16;
+        /// <summary>
+        /// If enabled, buffers are automatically resized by the acquisition pipeline 
+        /// when the BUFFER_TOO_SMALL operation result is returned.
+        /// </summary>
+        public bool BufferAutoResize { get; set; } = true;
+        public ImageFormat ImageFormat { get; set; } = new ImageFormat();
+        public AcquisitionControl AcquisitionControl { get; set; } = new AcquisitionControl();
+    }
+
+    public class ImageFormat
+    {
+        public uint Width { get; set; } = 1000;
+        public uint Height { get; set; } = 1000;
+        public uint OffsetX { get; set; } = 0;
+        public uint OffsetY { get; set; } = 0;
+        public PixelFormat PixelFormat { get; set; } = PixelFormat.Mono8;
+
+        public void Read(PvGenParameterArray ps)
+        {
+            var t = ps.GetInteger("Width");
+            if (t != null)
+            {
+                Width = (uint)t.Value;
+            }
+            t = ps.GetInteger("Height");
+            if (t != null)
+            {
+                Height = (uint)t.Value;
+            }
+            t = ps.GetInteger("OffsetX");
+            if (t != null)
+            {
+                OffsetX = (uint)t.Value;
+            }
+            t = ps.GetInteger("OffsetY");
+            if (t != null)
+            {
+                OffsetY = (uint)t.Value;
+            }
+            var p = ps.GetEnum("PixelFormat");
+            if (p != null)
+            {
+                PixelFormat = (PixelFormat)Enum.Parse(typeof(PixelFormat), p.ValueString);
+            }
+        }
+
+        public void Write(PvGenParameterArray ps)
+        {
+            ps.SetIntegerValue("Width", Width);
+            ps.SetIntegerValue("Height", Height);
+            ps.SetIntegerValue("OffsetX", OffsetX);
+            ps.SetIntegerValue("OffsetY", OffsetY);
+            ps.SetEnumValue("PixelFormat", PixelFormat.ToString());
+        }
+    }
+
+    public class AcquisitionControl
+    {
+        public bool AcquisitionFrameRateEnable { get; set; } = true;
+        public double AcquisitionFrameRate { get; set; } = 10;
+        /// <summary>
+        /// Exposure time in microseconds
+        /// </summary>
+        public double ExposureTime { get; set; } = 10000;
+
+        public void Read(PvGenParameterArray ps)
+        {
+            var b = ps.GetBoolean("AcquisitionFrameRateEnable");
+            if (b != null)
+            {
+                AcquisitionFrameRateEnable = b.Value;
+            }
+            var f = ps.GetFloat("AcquisitionFrameRate");
+            if (f != null)
+            {
+                AcquisitionFrameRate = f.Value;
+            }
+            f = ps.GetFloat("ExposureTime");
+            if (f != null)
+            {
+                ExposureTime = f.Value;
+            }
+        }
+
+        public void Write(PvGenParameterArray ps)
+        {
+            ps.SetBooleanValue("AcquisitionFrameRateEnable", AcquisitionFrameRateEnable);
+            ps.SetFloatValue("AcquisitionFrameRate", AcquisitionFrameRate);
+            ps.SetFloatValue("ExposureTime", ExposureTime);
+        }
+    }
+
+    public enum PixelFormat
+    {
+        Mono8,
+        Mono10,
+        Mono10Packed,
+        Mono12,
+        Mono12Packed
     }
 }
