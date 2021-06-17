@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using PvDotNet;
 using PvGUIDotNet;
 using Ice;
@@ -69,7 +70,10 @@ namespace Imager
         const string configpath = "Config.yaml";
         Config config;
         Communicator communicator;
-
+        bool iscolormap = false;
+        bool isdisplay = true;
+        PvBufferConverter mBufferConverter = new PvBufferConverter(Environment.ProcessorCount);
+        PvBuffer mPvBuffer = new PvBuffer(PvPayloadType.Image);
 
         public MainForm()
         {
@@ -133,6 +137,7 @@ namespace Imager
             ServerIP.Text = config.ServerAddress;
             ServerPort.Value = config.ServerPort;
             Server.Checked = config.EnableServer;
+            mDisplayThread.VSyncEnabled = config.DisplayVSync;
         }
 
         void UpdateToConfig()
@@ -144,6 +149,7 @@ namespace Imager
             config.EnableServer = Server.Checked;
             config.ServerAddress = ServerIP.Text;
             config.ServerPort = (ushort)ServerPort.Value;
+            config.DisplayVSync = mDisplayThread.VSyncEnabled;
         }
 
         void DeviceUpdateFromConfig()
@@ -158,9 +164,17 @@ namespace Imager
             config.AcquisitionControl.Read(mDevice.Parameters);
         }
 
-        void SaveConfig(string filepath = configpath)
+        void SaveConfig(string filepath = configpath, bool ismeta = false)
         {
-            filepath.WriteYamlFile(config);
+            if (ismeta)
+            {
+                var cm = config.ColorMap;
+                config.ColorMap = null;
+                filepath.WriteYamlFile(config);
+                config.ColorMap = cm;
+            }
+            else
+            { filepath.WriteYamlFile(config); }
         }
 
         void EnableUI()
@@ -435,7 +449,33 @@ namespace Imager
 
         void DisplayThread_OnBufferDisplay(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
         {
-            display.Display(aBuffer);
+            if (!isdisplay) { return; }
+
+            if (iscolormap && config.ColorMap != null)
+            {
+                // convert current buffer to same size buffer with BGRA8 pixels(display internal buffer format)
+                mBufferConverter.Convert(aBuffer, mPvBuffer, true);
+                // color mapping
+                unsafe
+                {
+                    Parallel.For(0, mPvBuffer.Image.Width * mPvBuffer.Image.Height, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }, i =>
+                       {
+                           // BGRA 8 bits per channel. Reads B-G-R-A from lowest to highest byte address
+                           var pB = mPvBuffer.Image.DataPointer + 4 * i;
+                           var pG = pB + 1;
+                           var pR = pB + 2;
+                           // RGB 8 bits per channel in colormap
+                           *pR = config.ColorMap[*pR][0];
+                           *pG = config.ColorMap[*pG][1];
+                           *pB = config.ColorMap[*pB][2];
+                       });
+                }
+                display.Display(mPvBuffer);
+            }
+            else
+            {
+                display.Display(aBuffer);
+            }
         }
 
         void DisplayThread_OnBufferDone(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
@@ -456,22 +496,10 @@ namespace Imager
         void OnRecordStopped()
         {
             UpdateToConfig();
-            SaveConfig($"{recorder.RecordPath}.yaml");
+            SaveConfig($"{recorder.RecordPath}.meta.yaml", true);
             recorder.RecordPath = null;
             Record.Text = "Start Record";
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         /// <summary>
@@ -591,6 +619,10 @@ namespace Imager
             // Reset stream statistics
             PvGenCommand lResetStats = mStream.Parameters.GetCommand("Reset");
             lResetStats.Execute();
+
+            // Prepare buffer for colormap and display
+            mPvBuffer.Free();
+            mPvBuffer.Image.Alloc((uint)mDevice.Parameters.GetInteger("Width").Value, (uint)mDevice.Parameters.GetInteger("Height").Value, PvPixelType.BGRa8);
 
             // Reset display thread stats
             mDisplayThread.ResetStatistics();
@@ -722,6 +754,16 @@ namespace Imager
                     return;
                 }
 
+                if (config.StopDisplayWhenRecord)
+                {
+                    IsDisplay.Checked = false;
+                }
+                if (config.ResetStatisticsWhenRecord)
+                {
+                    mStream.Parameters.ExecuteCommand("Reset");
+                    mDisplayThread.ResetStatistics();
+                }
+
                 recorder.RecordPath = recordpath;
                 recorder.DataFormat = (DataFormat)DataFormat.SelectedIndex;
                 recorder.AvgBitrate = (uint)AvgBitRate.Value;
@@ -783,6 +825,16 @@ namespace Imager
                     ServerPort.Enabled = true;
                 }
             }
+        }
+
+        void ColorMap_CheckedChanged(object sender, EventArgs e)
+        {
+            iscolormap = ColorMap.Checked;
+        }
+
+        void IsDisplay_CheckedChanged(object sender, EventArgs e)
+        {
+            isdisplay = IsDisplay.Checked;
         }
     }
 }

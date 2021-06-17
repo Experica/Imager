@@ -38,6 +38,9 @@ namespace Imager
         public bool EnableServer { get; set; } = false;
         public string ServerAddress { get; set; } = "LocalHost";
         public ushort ServerPort { get; set; } = 10000;
+        public bool DisplayVSync { get; set; } = false;
+        public bool StopDisplayWhenRecord { get; set; } = false;
+        public bool ResetStatisticsWhenRecord { get; set; } = true;
         /// <summary>
         /// Increasing the buffer count can make streaming more tolerant to missing block IDs, 
         /// but at the expense of using more memory and increasing latency.
@@ -53,6 +56,10 @@ namespace Imager
         public bool BufferAutoResize { get; set; } = true;
         public ImageFormat ImageFormat { get; set; } = new ImageFormat();
         public AcquisitionControl AcquisitionControl { get; set; } = new AcquisitionControl();
+        /// <summary>
+        /// Array of 256 colors with R,G,B 8 bits per channel pixel
+        /// </summary>
+        public byte[][] ColorMap { get; set; } = null;
     }
 
     public class ImageFormat
@@ -61,7 +68,7 @@ namespace Imager
         public uint Height { get; set; } = 1000;
         public uint OffsetX { get; set; } = 0;
         public uint OffsetY { get; set; } = 0;
-        public PixelFormat PixelFormat { get; set; } = PixelFormat.Mono8;
+        public PvPixelType PixelFormat { get; set; } = PvPixelType.Mono8;
 
         public void Read(PvGenParameterArray ps)
         {
@@ -88,7 +95,7 @@ namespace Imager
             var p = ps.GetEnum("PixelFormat");
             if (p != null)
             {
-                PixelFormat = (PixelFormat)Enum.Parse(typeof(PixelFormat), p.ValueString);
+                PixelFormat = (PvPixelType)Enum.Parse(typeof(PvPixelType), p.ValueString);
             }
         }
 
@@ -136,14 +143,5 @@ namespace Imager
             ps.SetFloatValue("AcquisitionFrameRate", AcquisitionFrameRate);
             ps.SetFloatValue("ExposureTime", ExposureTime);
         }
-    }
-
-    public enum PixelFormat
-    {
-        Mono8,
-        Mono10,
-        Mono10Packed,
-        Mono12,
-        Mono12Packed
     }
 }

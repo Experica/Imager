@@ -100,6 +100,8 @@ namespace Imager
             this.ServerIP = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.Server = new System.Windows.Forms.CheckBox();
+            this.ColorMap = new System.Windows.Forms.CheckBox();
+            this.IsDisplay = new System.Windows.Forms.CheckBox();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -116,11 +118,13 @@ namespace Imager
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.IsDisplay);
+            this.groupBox4.Controls.Add(this.ColorMap);
             this.groupBox4.Controls.Add(this.display);
             this.groupBox4.Controls.Add(this.statusControl);
             this.groupBox4.Location = new System.Drawing.Point(346, 27);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(662, 748);
+            this.groupBox4.Size = new System.Drawing.Size(662, 774);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Display";
@@ -133,7 +137,7 @@ namespace Imager
             this.display.BackColor = System.Drawing.Color.Transparent;
             this.display.BackgroundColor = System.Drawing.Color.DarkGray;
             this.display.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.display.Location = new System.Drawing.Point(6, 17);
+            this.display.Location = new System.Drawing.Point(6, 42);
             this.display.Name = "display";
             this.display.ROI = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.display.Size = new System.Drawing.Size(650, 650);
@@ -150,7 +154,7 @@ namespace Imager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusControl.BuffersReallocated = false;
             this.statusControl.DisplayThread = null;
-            this.statusControl.Location = new System.Drawing.Point(6, 673);
+            this.statusControl.Location = new System.Drawing.Point(6, 699);
             this.statusControl.MinimumSize = new System.Drawing.Size(400, 32);
             this.statusControl.Name = "statusControl";
             this.statusControl.Size = new System.Drawing.Size(650, 67);
@@ -165,7 +169,7 @@ namespace Imager
             this.groupBox3.Controls.Add(this.Record);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.modeComboBox);
-            this.groupBox3.Location = new System.Drawing.Point(12, 658);
+            this.groupBox3.Location = new System.Drawing.Point(12, 674);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(320, 116);
             this.groupBox3.TabIndex = 1;
@@ -245,9 +249,9 @@ namespace Imager
             this.groupBox2.Controls.Add(this.communicationButton);
             this.groupBox2.Controls.Add(this.deviceButton);
             this.groupBox2.Controls.Add(this.streamButton);
-            this.groupBox2.Location = new System.Drawing.Point(12, 248);
+            this.groupBox2.Location = new System.Drawing.Point(12, 252);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 120);
+            this.groupBox2.Size = new System.Drawing.Size(320, 130);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Parameters and Controls";
@@ -301,7 +305,7 @@ namespace Imager
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.connectButton);
             this.groupBox1.Controls.Add(this.disconnectButton);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
+            this.groupBox1.Location = new System.Drawing.Point(12, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(320, 215);
             this.groupBox1.TabIndex = 0;
@@ -486,7 +490,7 @@ namespace Imager
             this.groupBox5.Controls.Add(this.ChooseDataDir);
             this.groupBox5.Controls.Add(this.DataDir);
             this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Location = new System.Drawing.Point(12, 380);
+            this.groupBox5.Location = new System.Drawing.Point(12, 388);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(320, 146);
             this.groupBox5.TabIndex = 5;
@@ -578,7 +582,7 @@ namespace Imager
             this.groupBox6.Controls.Add(this.ServerIP);
             this.groupBox6.Controls.Add(this.label11);
             this.groupBox6.Controls.Add(this.Server);
-            this.groupBox6.Location = new System.Drawing.Point(12, 532);
+            this.groupBox6.Location = new System.Drawing.Point(12, 543);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(320, 118);
             this.groupBox6.TabIndex = 6;
@@ -634,11 +638,37 @@ namespace Imager
             this.Server.UseVisualStyleBackColor = true;
             this.Server.CheckedChanged += new System.EventHandler(this.Server_CheckedChanged);
             // 
+            // ColorMap
+            // 
+            this.ColorMap.AutoSize = true;
+            this.ColorMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorMap.Location = new System.Drawing.Point(139, 14);
+            this.ColorMap.Name = "ColorMap";
+            this.ColorMap.Size = new System.Drawing.Size(96, 24);
+            this.ColorMap.TabIndex = 11;
+            this.ColorMap.Text = "ColorMap";
+            this.ColorMap.UseVisualStyleBackColor = true;
+            this.ColorMap.CheckedChanged += new System.EventHandler(this.ColorMap_CheckedChanged);
+            // 
+            // IsDisplay
+            // 
+            this.IsDisplay.AutoSize = true;
+            this.IsDisplay.Checked = true;
+            this.IsDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsDisplay.Location = new System.Drawing.Point(50, 14);
+            this.IsDisplay.Name = "IsDisplay";
+            this.IsDisplay.Size = new System.Drawing.Size(78, 24);
+            this.IsDisplay.TabIndex = 12;
+            this.IsDisplay.Text = "Enable";
+            this.IsDisplay.UseVisualStyleBackColor = true;
+            this.IsDisplay.CheckedChanged += new System.EventHandler(this.IsDisplay_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 778);
+            this.ClientSize = new System.Drawing.Size(1022, 804);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -654,6 +684,7 @@ namespace Imager
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -723,6 +754,8 @@ namespace Imager
         private System.Windows.Forms.NumericUpDown ServerPort;
         public System.Windows.Forms.CheckBox Record;
         public System.Windows.Forms.CheckBox Play;
+        private System.Windows.Forms.CheckBox ColorMap;
+        private System.Windows.Forms.CheckBox IsDisplay;
     }
 }
 

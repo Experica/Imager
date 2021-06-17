@@ -68,6 +68,7 @@ namespace Imager
 
         public bool SaveImage(PvBuffer pvBuffer)
         {
+            if (pvBuffer == null) { return false; }
             switch (DataFormat)
             {
                 case DataFormat.MP4:
