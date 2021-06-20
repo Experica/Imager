@@ -39,6 +39,7 @@ namespace Imager
         public string ServerAddress { get; set; } = "LocalHost";
         public ushort ServerPort { get; set; } = 10000;
         public bool DisplayVSync { get; set; } = false;
+        public uint DisplayTargetFPS { get; set; } = 30;
         public bool StopDisplayWhenRecord { get; set; } = false;
         public bool ResetStatisticsWhenRecord { get; set; } = true;
         /// <summary>

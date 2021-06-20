@@ -98,6 +98,72 @@ namespace Imager
 
             DataFormat.DataSource = Enum.GetNames(typeof(DataFormat));
             DataFormat.SelectedIndex = 0;
+
+            var displaymenu = display.ContextMenuStrip;
+            displaymenu.Items.Add(new ToolStripSeparator());
+            displaymenu.Items.Add("Create ROI").Click += CreateROI_Click;
+            displaymenu.Items.Add("Upload ROI").Click += UploadROI_Click;
+            displaymenu.Items.Add(new ToolStripSeparator());
+            displaymenu.Items.Add("Clear ROI").Click += ClearROI_Click;
+        }
+
+        void UploadROI_Click(object sender, EventArgs e)
+        {
+            if (display.ROI.IsEmpty)
+            {
+                if (MessageBox.Show("Set Full Frame?", Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Play.Checked = false;
+                    mDevice.Parameters.SetIntegerValue("OffsetX", 0);
+                    mDevice.Parameters.SetIntegerValue("OffsetY", 0);
+                    mDevice.Parameters.SetIntegerValue("Width", mDevice.Parameters.GetIntegerValue("WidthMax"));
+                    mDevice.Parameters.SetIntegerValue("Height", mDevice.Parameters.GetIntegerValue("HeightMax"));
+                    display.ClearROI();
+                    Play.Checked = true;
+                    IsDisplay.Checked = true;
+                }
+                else
+                {
+                    display.ClearROI();
+                }
+            }
+            else
+            {
+                // minimum 2 increments for X Axis, 1 increments for Y Axis
+                var w = (display.ROI.Width % 2 == 1) ? display.ROI.Width + 1 : display.ROI.Width;
+                var h = display.ROI.Height;
+                var x = (display.ROI.X % 2 == 1) ? display.ROI.X + 1 : display.ROI.X;
+                var y = display.ROI.Y;
+                if (MessageBox.Show($"Set Frame ROI: Width={w}, Height={h}, OffsetX={x}, OffsetY={y}?", Text, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Play.Checked = false;
+                    mDevice.Parameters.SetIntegerValue("OffsetX", 0);
+                    mDevice.Parameters.SetIntegerValue("OffsetY", 0);
+                    mDevice.Parameters.SetIntegerValue("Width", w);
+                    mDevice.Parameters.SetIntegerValue("Height", h);
+                    mDevice.Parameters.SetIntegerValue("OffsetX", x);
+                    mDevice.Parameters.SetIntegerValue("OffsetY", y);
+                    display.ClearROI();
+                    Play.Checked = true;
+                    IsDisplay.Checked = true;
+                }
+                else
+                {
+                    display.ClearROI();
+                }
+            }
+        }
+
+        void ClearROI_Click(object sender, EventArgs e)
+        {
+            display.ClearROI();
+            UploadROI_Click(null, null);
+        }
+
+        void CreateROI_Click(object sender, EventArgs e)
+        {
+            IsDisplay.Checked = false;
+            display.CreateROI();
         }
 
         void MainForm_Load(object sender, EventArgs e)
@@ -138,6 +204,7 @@ namespace Imager
             ServerPort.Value = config.ServerPort;
             Server.Checked = config.EnableServer;
             mDisplayThread.VSyncEnabled = config.DisplayVSync;
+            mDisplayThread.TargetFPS = config.DisplayTargetFPS;
         }
 
         void UpdateToConfig()
@@ -150,6 +217,7 @@ namespace Imager
             config.ServerAddress = ServerIP.Text;
             config.ServerPort = (ushort)ServerPort.Value;
             config.DisplayVSync = mDisplayThread.VSyncEnabled;
+            config.DisplayTargetFPS = mDisplayThread.TargetFPS;
         }
 
         void DeviceUpdateFromConfig()

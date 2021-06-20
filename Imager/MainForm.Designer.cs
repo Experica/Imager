@@ -52,6 +52,8 @@ namespace Imager
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.IsDisplay = new System.Windows.Forms.CheckBox();
+            this.ColorMap = new System.Windows.Forms.CheckBox();
             this.display = new PvGUIDotNet.PvDisplayControl();
             this.statusControl = new PvGUIDotNet.PvStatusControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -100,8 +102,6 @@ namespace Imager
             this.ServerIP = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.Server = new System.Windows.Forms.CheckBox();
-            this.ColorMap = new System.Windows.Forms.CheckBox();
-            this.IsDisplay = new System.Windows.Forms.CheckBox();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -128,6 +128,32 @@ namespace Imager
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Display";
+            // 
+            // IsDisplay
+            // 
+            this.IsDisplay.AutoSize = true;
+            this.IsDisplay.Checked = true;
+            this.IsDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsDisplay.Location = new System.Drawing.Point(50, 14);
+            this.IsDisplay.Name = "IsDisplay";
+            this.IsDisplay.Size = new System.Drawing.Size(78, 24);
+            this.IsDisplay.TabIndex = 12;
+            this.IsDisplay.Text = "Enable";
+            this.IsDisplay.UseVisualStyleBackColor = true;
+            this.IsDisplay.CheckedChanged += new System.EventHandler(this.IsDisplay_CheckedChanged);
+            // 
+            // ColorMap
+            // 
+            this.ColorMap.AutoSize = true;
+            this.ColorMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorMap.Location = new System.Drawing.Point(139, 14);
+            this.ColorMap.Name = "ColorMap";
+            this.ColorMap.Size = new System.Drawing.Size(96, 24);
+            this.ColorMap.TabIndex = 11;
+            this.ColorMap.Text = "ColorMap";
+            this.ColorMap.UseVisualStyleBackColor = true;
+            this.ColorMap.CheckedChanged += new System.EventHandler(this.ColorMap_CheckedChanged);
             // 
             // display
             // 
@@ -637,32 +663,6 @@ namespace Imager
             this.Server.Text = "Enable";
             this.Server.UseVisualStyleBackColor = true;
             this.Server.CheckedChanged += new System.EventHandler(this.Server_CheckedChanged);
-            // 
-            // ColorMap
-            // 
-            this.ColorMap.AutoSize = true;
-            this.ColorMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColorMap.Location = new System.Drawing.Point(139, 14);
-            this.ColorMap.Name = "ColorMap";
-            this.ColorMap.Size = new System.Drawing.Size(96, 24);
-            this.ColorMap.TabIndex = 11;
-            this.ColorMap.Text = "ColorMap";
-            this.ColorMap.UseVisualStyleBackColor = true;
-            this.ColorMap.CheckedChanged += new System.EventHandler(this.ColorMap_CheckedChanged);
-            // 
-            // IsDisplay
-            // 
-            this.IsDisplay.AutoSize = true;
-            this.IsDisplay.Checked = true;
-            this.IsDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.IsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IsDisplay.Location = new System.Drawing.Point(50, 14);
-            this.IsDisplay.Name = "IsDisplay";
-            this.IsDisplay.Size = new System.Drawing.Size(78, 24);
-            this.IsDisplay.TabIndex = 12;
-            this.IsDisplay.Text = "Enable";
-            this.IsDisplay.UseVisualStyleBackColor = true;
-            this.IsDisplay.CheckedChanged += new System.EventHandler(this.IsDisplay_CheckedChanged);
             // 
             // MainForm
             // 
