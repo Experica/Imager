@@ -153,6 +153,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C0B8A83B7AAD45CF8D83E66D9C5C9213"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C1B1899EB926C4008BD3599563B41FB6"
         "OwnerKey" = "8:_14BA00A98513437EB812BE153C0568E9"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,12 +201,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E899C05662394562A0F9A2618750D8BB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EA878F81B507407691129990D3080334"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -220,12 +220,6 @@
         "Entry"
         {
         "MsmKey" = "8:_FE00D8B644EABE1FF5682B6EB1B51208"
-        "OwnerKey" = "8:_EA878F81B507407691129990D3080334"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FE00D8B644EABE1FF5682B6EB1B51208"
         "OwnerKey" = "8:_48A9BF47429C8274E54944129288D2B9"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -233,6 +227,12 @@
         {
         "MsmKey" = "8:_FE00D8B644EABE1FF5682B6EB1B51208"
         "OwnerKey" = "8:_AFAB97E60A9B43868C1BA69D7108ECAE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FE00D8B644EABE1FF5682B6EB1B51208"
+        "OwnerKey" = "8:_EA878F81B507407691129990D3080334"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -292,6 +292,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_48A9BF47429C8274E54944129288D2B9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EA878F81B507407691129990D3080334"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -299,12 +305,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_AFAB97E60A9B43868C1BA69D7108ECAE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_48A9BF47429C8274E54944129288D2B9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -842,6 +842,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C0B8A83B7AAD45CF8D83E66D9C5C9213"
+            {
+            "SourcePath" = "8:..\\Imager\\bin\\Release\\Config.yaml"
+            "TargetName" = "8:Config.yaml"
+            "Tag" = "8:"
+            "Folder" = "8:_AA81A0F08E794FA2AE4E3ED29A9F34DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C1B1899EB926C4008BD3599563B41FB6"
             {
             "AssemblyRegister" = "3:1"
@@ -964,26 +984,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E899C05662394562A0F9A2618750D8BB"
-            {
-            "SourcePath" = "8:..\\Imager\\bin\\Debug\\Config.yaml"
-            "TargetName" = "8:Config.yaml"
-            "Tag" = "8:"
-            "Folder" = "8:_AA81A0F08E794FA2AE4E3ED29A9F34DD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F82706B4FE094EB48191A3D80A5E2699"
