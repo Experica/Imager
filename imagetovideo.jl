@@ -43,5 +43,3 @@ f1 = load("C:\\Users\\fff00\\Pictures\\Test\\Test-0.TIFF")
 
 
 VideoIO.VIO_PIX_FMT_DEF_ELTYPE_LU
-
-## Compress

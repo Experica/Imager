@@ -30,6 +30,7 @@ namespace Imager
 {
     public enum DataFormat
     {
+        Raw,
         TIFF,
         MP4
     }
@@ -76,6 +77,10 @@ namespace Imager
                     break;
                 case DataFormat.TIFF:
                     bufferWriter.Store(pvBuffer, $"{RecordPath}-{ImageWritten}.{DataFormat}", PvBufferFormatType.TIFF, ref BytesWritten);
+                    ImageWritten++;
+                    break;
+                case DataFormat.Raw:
+                    bufferWriter.Store(pvBuffer, $"{RecordPath}-{ImageWritten}.{DataFormat}", PvBufferFormatType.Raw, ref BytesWritten);
                     ImageWritten++;
                     break;
                 default:

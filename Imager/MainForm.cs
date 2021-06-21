@@ -564,11 +564,11 @@ namespace Imager
         void OnRecordStopped()
         {
             UpdateToConfig();
+            DeviceUpdateToConfig();
             SaveConfig($"{recorder.RecordPath}.meta.yaml", true);
             recorder.RecordPath = null;
             Record.Text = "Start Record";
         }
-
 
         /// <summary>
         /// GenICam parameter invalidation event, registered for all parameters.
@@ -673,9 +673,6 @@ namespace Imager
             Disconnect();
         }
 
-
-
-
         void StartAcquisition()
         {
             var lPayloadSize = mDevice.PayloadSize;
@@ -705,31 +702,16 @@ namespace Imager
             mAcquisitionManager.Stop();
         }
 
-        /// <summary>
-        /// Display communication parameters browser form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void communicationButton_Click(object sender, EventArgs e)
         {
             ShowGenWindow(mCommBrowser, mDevice.CommunicationParameters, "Communication Control");
         }
 
-        /// <summary>
-        /// Display device parameters browser form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void deviceButton_Click(object sender, EventArgs e)
         {
             ShowGenWindow(mDeviceBrowser, mDevice.Parameters, "Device Control");
         }
 
-        /// <summary>
-        /// Display stream parameters browser form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void streamButton_Click(object sender, EventArgs e)
         {
             ShowGenWindow(mStreamBrowser, mStream.Parameters, "Image Stream Control");
