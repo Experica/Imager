@@ -237,9 +237,17 @@ namespace Imager
             if (ismeta)
             {
                 var cm = config.ColorMap;
+                var datadir = config.DataDir;
+                var recordname = config.RecordName;
                 config.ColorMap = null;
+                config.DataDir = Path.GetDirectoryName(recorder.RecordPath);
+                config.RecordName = Path.GetFileNameWithoutExtension(recorder.RecordPath);
+
                 filepath.WriteYamlFile(config);
+
                 config.ColorMap = cm;
+                config.DataDir = datadir;
+                config.RecordName = recordname;
             }
             else
             { filepath.WriteYamlFile(config); }
@@ -565,7 +573,7 @@ namespace Imager
         {
             UpdateToConfig();
             DeviceUpdateToConfig();
-            SaveConfig($"{recorder.RecordPath}.meta.yaml", true);
+            SaveConfig($"{recorder.RecordPath}.meta", true);
             recorder.RecordPath = null;
             Record.Text = "Start Record";
         }
