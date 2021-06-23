@@ -573,8 +573,13 @@ namespace Imager
         {
             UpdateToConfig();
             DeviceUpdateToConfig();
-            SaveConfig($"{recorder.RecordPath}.meta", true);
+            var metapath = $"{recorder.RecordPath}.meta";
+            if (!File.Exists(metapath))
+            {
+                SaveConfig(metapath, true);
+            }
             recorder.RecordPath = null;
+            recorder.RecordEpoch = "0";
             Record.Text = "Start Record";
         }
 

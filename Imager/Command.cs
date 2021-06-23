@@ -54,7 +54,17 @@ namespace Imager
 
         public override void setIsRecording(bool isrecording, Current current = null)
         {
-            mainform.BeginInvoke(mainform.mRecordCheckedHandler,isrecording);
+            mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording);
+        }
+
+        public override string getRecordEpoch(Current current = null)
+        {
+            return mainform.recorder.RecordEpoch;
+        }
+
+        public override void setRecordEpoch(string epoch, Current current = null)
+        {
+            mainform.recorder.RecordEpoch = epoch;
         }
     }
 }

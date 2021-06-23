@@ -64,6 +64,12 @@ namespace ImagerCommand
             set { command.setRecordPath(value); }
         }
 
+        public string RecordEpoch
+        {
+            get { return command.getRecordEpoch(); }
+            set { command.setRecordEpoch(value); }
+        }
+
         public bool IsRecording
         {
             get { return command.getIsRecording(); }

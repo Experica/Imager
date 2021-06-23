@@ -51,6 +51,7 @@ namespace Imager
         public RecordStatus RecordStatus = RecordStatus.None;
         public DataFormat DataFormat = DataFormat.TIFF;
         public string RecordPath = null;
+        public string RecordEpoch = "0";
 
         public uint BytesWritten = 0;
         public uint ImageWritten = 0;
@@ -76,11 +77,11 @@ namespace Imager
                     SaveMP4(pvBuffer);
                     break;
                 case DataFormat.TIFF:
-                    bufferWriter.Store(pvBuffer, $"{RecordPath}-{ImageWritten}.{DataFormat}", PvBufferFormatType.TIFF, ref BytesWritten);
+                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Epoch{RecordEpoch}-Frame{ImageWritten}.{DataFormat}", PvBufferFormatType.TIFF, ref BytesWritten);
                     ImageWritten++;
                     break;
                 case DataFormat.Raw:
-                    bufferWriter.Store(pvBuffer, $"{RecordPath}-{ImageWritten}.{DataFormat}", PvBufferFormatType.Raw, ref BytesWritten);
+                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Epoch{RecordEpoch}-Frame{ImageWritten}.{DataFormat}", PvBufferFormatType.Raw, ref BytesWritten);
                     ImageWritten++;
                     break;
                 default:
@@ -110,7 +111,7 @@ namespace Imager
         {
             if (!mp4Writer.IsOpened())
             {
-                mp4Writer.Open($"{RecordPath}.{DataFormat}", pvBuffer.Image);
+                mp4Writer.Open($"{RecordPath}-Epoch{RecordEpoch}.{DataFormat}", pvBuffer.Image);
             }
             mp4Writer.WriteFrame(pvBuffer.Image, ref BytesWritten);
         }

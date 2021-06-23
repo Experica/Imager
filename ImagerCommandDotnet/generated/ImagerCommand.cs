@@ -45,6 +45,12 @@ namespace Imager
     public delegate void Callback_Command_setRecordPath();
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_getRecordEpoch(string ret);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_setRecordEpoch();
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
     public delegate void Callback_Command_getIsRecording(bool ret);
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
@@ -79,6 +85,30 @@ namespace Imager
         global::Ice.AsyncResult begin_setRecordPath(string path, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
 
         void end_setRecordPath(global::Ice.AsyncResult asyncResult);
+
+        string getRecordEpoch(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task<string> getRecordEpochAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_getRecordEpoch> begin_getRecordEpoch(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_getRecordEpoch(global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_getRecordEpoch(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        string end_getRecordEpoch(global::Ice.AsyncResult asyncResult);
+
+        void setRecordEpoch(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task setRecordEpochAsync(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_setRecordEpoch> begin_setRecordEpoch(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_setRecordEpoch(string epoch, global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_setRecordEpoch(string epoch, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        void end_setRecordEpoch(global::Ice.AsyncResult asyncResult);
 
         bool getIsRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
 
@@ -116,6 +146,12 @@ namespace Imager
 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
         void setRecordPath(string path, global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        string getRecordEpoch(global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        void setRecordEpoch(string epoch, global::Ice.Current current = null);
 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
         bool getIsRecording(global::Ice.Current current = null);
@@ -159,6 +195,30 @@ namespace Imager
             try
             {
                 _iceI_setRecordPathAsync(path, context, null, global::System.Threading.CancellationToken.None, true).Wait();
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public string getRecordEpoch(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                return _iceI_getRecordEpochAsync(context, null, global::System.Threading.CancellationToken.None, true).Result;
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public void setRecordEpoch(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                _iceI_setRecordEpochAsync(epoch, context, null, global::System.Threading.CancellationToken.None, true).Wait();
             }
             catch(global::System.AggregateException ex_)
             {
@@ -252,6 +312,67 @@ namespace Imager
                 write: (global::Ice.OutputStream ostr) =>
                 {
                     ostr.writeString(iceP_path);
+                });
+        }
+
+        public global::System.Threading.Tasks.Task<string> getRecordEpochAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_getRecordEpochAsync(context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task<string> _iceI_getRecordEpochAsync(global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            iceCheckTwowayOnly(_getRecordEpoch_name);
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<string>(progress, cancel);
+            _iceI_getRecordEpoch(context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _getRecordEpoch_name = "getRecordEpoch";
+
+        private void _iceI_getRecordEpoch(global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<string>(completed);
+            outAsync.invoke(
+                _getRecordEpoch_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                read: (global::Ice.InputStream istr) =>
+                {
+                    string ret;
+                    ret = istr.readString();
+                    return ret;
+                });
+        }
+
+        public global::System.Threading.Tasks.Task setRecordEpochAsync(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_setRecordEpochAsync(epoch, context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task _iceI_setRecordEpochAsync(string iceP_epoch, global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<object>(progress, cancel);
+            _iceI_setRecordEpoch(iceP_epoch, context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _setRecordEpoch_name = "setRecordEpoch";
+
+        private void _iceI_setRecordEpoch(string iceP_epoch, global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<object>(completed);
+            outAsync.invoke(
+                _setRecordEpoch_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                write: (global::Ice.OutputStream ostr) =>
+                {
+                    ostr.writeString(iceP_epoch);
                 });
         }
 
@@ -391,6 +512,80 @@ namespace Imager
                 },
                 this, _setRecordPath_name, cookie, completedCallback);
             _iceI_setRecordPath(iceP_path, context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_getRecordEpoch> begin_getRecordEpoch(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_getRecordEpoch(context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_getRecordEpoch(global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getRecordEpoch(new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_getRecordEpoch(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getRecordEpoch(context, callback, cookie, false);
+        }
+
+        public string end_getRecordEpoch(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _getRecordEpoch_name);
+            var outgoing_ = (global::IceInternal.OutgoingAsyncT<string>)resultI_.OutgoingAsync;
+            return outgoing_.getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_getRecordEpoch> begin_getRecordEpoch(global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            iceCheckAsyncTwowayOnly(_getRecordEpoch_name);
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_getRecordEpoch, string>(
+                (Callback_Command_getRecordEpoch cb, string ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke(ret);
+                    }
+                },
+                this, _getRecordEpoch_name, cookie, completedCallback);
+            _iceI_getRecordEpoch(context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_setRecordEpoch> begin_setRecordEpoch(string epoch, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_setRecordEpoch(epoch, context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_setRecordEpoch(string epoch, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setRecordEpoch(epoch, new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_setRecordEpoch(string epoch, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setRecordEpoch(epoch, context, callback, cookie, false);
+        }
+
+        public void end_setRecordEpoch(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _setRecordEpoch_name);
+            ((global::IceInternal.OutgoingAsyncT<object>)resultI_.OutgoingAsync).getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_setRecordEpoch> begin_setRecordEpoch(string iceP_epoch, global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_setRecordEpoch, object>(
+                (Callback_Command_setRecordEpoch cb, object ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke();
+                    }
+                },
+                this, _setRecordEpoch_name, cookie, completedCallback);
+            _iceI_setRecordEpoch(iceP_epoch, context, synchronous, completed);
             return completed;
         }
 
@@ -624,6 +819,10 @@ namespace Imager
 
         public abstract void setRecordPath(string path, global::Ice.Current current = null);
 
+        public abstract string getRecordEpoch(global::Ice.Current current = null);
+
+        public abstract void setRecordEpoch(string epoch, global::Ice.Current current = null);
+
         public abstract bool getIsRecording(global::Ice.Current current = null);
 
         public abstract void setIsRecording(bool isrecording, global::Ice.Current current = null);
@@ -690,6 +889,32 @@ namespace Imager
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
         public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_getRecordEpoch(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            inS.readEmptyParams();
+            var ret = obj.getRecordEpoch(current);
+            var ostr = inS.startWriteParams();
+            ostr.writeString(ret);
+            inS.endWriteParams(ostr);
+            return inS.setResult(ostr);
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_setRecordEpoch(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            var istr = inS.startReadParams();
+            string iceP_epoch;
+            iceP_epoch = istr.readString();
+            inS.endReadParams();
+            obj.setRecordEpoch(iceP_epoch, current);
+            return inS.setResult(inS.writeEmptyParams());
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
         iceD_getIsRecording(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
         {
             global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
@@ -717,12 +942,14 @@ namespace Imager
         private static readonly string[] _all =
         {
             "getIsRecording",
+            "getRecordEpoch",
             "getRecordPath",
             "ice_id",
             "ice_ids",
             "ice_isA",
             "ice_ping",
             "setIsRecording",
+            "setRecordEpoch",
             "setRecordPath"
         };
 
@@ -743,29 +970,37 @@ namespace Imager
                 }
                 case 1:
                 {
-                    return iceD_getRecordPath(this, inS, current);
+                    return iceD_getRecordEpoch(this, inS, current);
                 }
                 case 2:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_id(this, inS, current);
+                    return iceD_getRecordPath(this, inS, current);
                 }
                 case 3:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_ids(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_id(this, inS, current);
                 }
                 case 4:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_isA(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_ids(this, inS, current);
                 }
                 case 5:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_ping(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_isA(this, inS, current);
                 }
                 case 6:
                 {
-                    return iceD_setIsRecording(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_ping(this, inS, current);
                 }
                 case 7:
+                {
+                    return iceD_setIsRecording(this, inS, current);
+                }
+                case 8:
+                {
+                    return iceD_setRecordEpoch(this, inS, current);
+                }
+                case 9:
                 {
                     return iceD_setRecordPath(this, inS, current);
                 }
