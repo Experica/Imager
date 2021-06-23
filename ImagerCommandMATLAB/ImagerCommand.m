@@ -51,6 +51,22 @@ classdef ImagerCommand < handle
             end
         end
         
+        function SetRecordEpoch(obj,epoch)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                obj.command.setRecordEpoch(epoch);
+            end
+        end
+        
+        function [epoch] = GetRecordEpoch(obj)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                epoch = obj.command.getRecordEpoch();
+            end
+        end
+        
         function SetIsRecording(obj,isrecording)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');

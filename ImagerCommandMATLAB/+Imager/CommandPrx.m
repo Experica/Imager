@@ -5,6 +5,10 @@
 %   getRecordPathAsync
 %   setRecordPath
 %   setRecordPathAsync
+%   getRecordEpoch
+%   getRecordEpochAsync
+%   setRecordEpoch
+%   setRecordEpochAsync
 %   getIsRecording
 %   getIsRecordingAsync
 %   setIsRecording
@@ -71,6 +75,61 @@ classdef CommandPrx < Ice.ObjectPrx
             os_.writeString(path);
             obj.iceEndWriteParams(os_);
             r_ = obj.iceInvokeAsync('setRecordPath', 0, false, os_, 0, [], {}, varargin{:});
+        end
+        function result = getRecordEpoch(obj, varargin)
+            % getRecordEpoch
+            %
+            % Parameters:
+            %   context (containers.Map) - Optional request context.
+            %
+            % Returns (char)
+            
+            is_ = obj.iceInvoke('getRecordEpoch', 0, true, [], true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readString();
+            is_.endEncapsulation();
+        end
+        function r_ = getRecordEpochAsync(obj, varargin)
+            % getRecordEpochAsync
+            %
+            % Parameters:
+            %   context (containers.Map) - Optional request context.
+            %
+            % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
+            
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readString();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('getRecordEpoch', 0, true, [], 1, @unmarshal, {}, varargin{:});
+        end
+        function setRecordEpoch(obj, epoch, varargin)
+            % setRecordEpoch
+            %
+            % Parameters:
+            %   epoch (char)
+            %   context (containers.Map) - Optional request context.
+            
+            os_ = obj.iceStartWriteParams([]);
+            os_.writeString(epoch);
+            obj.iceEndWriteParams(os_);
+            obj.iceInvoke('setRecordEpoch', 0, false, os_, false, {}, varargin{:});
+        end
+        function r_ = setRecordEpochAsync(obj, epoch, varargin)
+            % setRecordEpochAsync
+            %
+            % Parameters:
+            %   epoch (char)
+            %   context (containers.Map) - Optional request context.
+            %
+            % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
+            
+            os_ = obj.iceStartWriteParams([]);
+            os_.writeString(epoch);
+            obj.iceEndWriteParams(os_);
+            r_ = obj.iceInvokeAsync('setRecordEpoch', 0, false, os_, 0, [], {}, varargin{:});
         end
         function result = getIsRecording(obj, varargin)
             % getIsRecording
