@@ -578,8 +578,7 @@ namespace Imager
             {
                 SaveConfig(metapath, true);
             }
-            recorder.RecordPath = null;
-            recorder.RecordEpoch = "0";
+            recorder.ResetPath();
             Record.Text = "Start Record";
         }
 
@@ -796,7 +795,7 @@ namespace Imager
             recorder.RecordPath = recordpath;
             recorder.DataFormat = (DataFormat)DataFormat.SelectedIndex;
             recorder.SaveCurrentImage(mDisplayThread);
-            recorder.RecordPath = null;
+            recorder.ResetPath();
         }
 
         void OnRecordChecked(bool check)
@@ -830,7 +829,7 @@ namespace Imager
                 recorder.RecordPath = recordpath;
                 recorder.DataFormat = (DataFormat)DataFormat.SelectedIndex;
                 recorder.AvgBitrate = (uint)AvgBitRate.Value;
-                recorder.Reset();
+                recorder.ResetCounter();
                 recorder.RecordStatus = RecordStatus.Recording;
                 Record.Text = "Stop Record";
             }

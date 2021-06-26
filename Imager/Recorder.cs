@@ -62,7 +62,13 @@ namespace Imager
             set { mp4Writer.AvgBitrate = value; }
         }
 
-        public void Reset()
+        public void ResetPath()
+        {
+            RecordPath = null;
+            RecordEpoch = "0";
+        }
+
+        public void ResetCounter()
         {
             ImageWritten = 0;
             BytesWritten = 0;
