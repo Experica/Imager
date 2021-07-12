@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using PvDotNet;
 using PvGUIDotNet;
@@ -343,7 +344,8 @@ namespace Imager
                 mPipeline = new PvPipeline(mStream)
                 {
                     BufferCount = Math.Max(4, config.BufferCount),
-                    HandleBufferTooSmall = config.BufferAutoResize
+                    HandleBufferTooSmall = config.BufferAutoResize,
+                    BufferHandlingThreadPriority = PvThreadPriority.TimeCritical
                 };
             }
             catch (PvException ex)
@@ -487,7 +489,7 @@ namespace Imager
             statusControl.DisplayThread = mDisplayThread;
 
             mDisplayThread.Start(mPipeline, mDevice.Parameters);
-            mDisplayThread.Priority = PvThreadPriority.AboveNormal;
+            mDisplayThread.Priority = PvThreadPriority.Highest;
 
             mAcquisitionManager = new PvAcquisitionStateManager(mDevice, mStream);
             mAcquisitionManager.OnAcquisitionStateChanged += OnAcquisitionStateChanged;
@@ -706,12 +708,20 @@ namespace Imager
 
             // Use acquisition manager to send the acquisition start command to the device
             mAcquisitionManager.Start();
+
+            // Raise priority when acquisiting
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
         }
 
         void StopAcquisition()
         {
             // Use acquisition manager to send the acquisition stop command to the device
             mAcquisitionManager.Stop();
+
+            // Normal priority when stopped acquisiting
+            System.Diagnostics.Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
+            Thread.CurrentThread.Priority = ThreadPriority.Normal;
         }
 
         void communicationButton_Click(object sender, EventArgs e)
