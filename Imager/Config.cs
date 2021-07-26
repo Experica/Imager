@@ -57,6 +57,7 @@ namespace Imager
         public bool BufferAutoResize { get; set; } = true;
         public ImageFormat ImageFormat { get; set; } = new ImageFormat();
         public AcquisitionControl AcquisitionControl { get; set; } = new AcquisitionControl();
+        public Strobe Strobe { get; set; } = new Strobe();
         /// <summary>
         /// Array of 256 colors with R,G,B 8 bits per channel pixel
         /// </summary>
@@ -143,6 +144,45 @@ namespace Imager
             ps.SetBooleanValue("AcquisitionFrameRateEnable", AcquisitionFrameRateEnable);
             ps.SetFloatValue("AcquisitionFrameRate", AcquisitionFrameRate);
             ps.SetFloatValue("ExposureTime", ExposureTime);
+        }
+    }
+
+    public class Strobe
+    {
+        /// <summary>
+        /// Strobe Delay after internal trigger for exposure in microseconds
+        /// </summary>
+        public double Strobe_Delay { get; set; } = 0;
+        /// <summary>
+        /// Strobe pulse width in microseconds
+        /// </summary>
+        public double Strobe_PulseWidth { get; set; } = 2000;
+        public bool Strobe_Invert { get; set; } = false;
+
+        public void Read(PvGenParameterArray ps)
+        {
+            var b = ps.GetBoolean("Strobe_Invert");
+            if (b != null)
+            {
+                Strobe_Invert = b.Value;
+            }
+            var f = ps.GetFloat("Strobe_Delay");
+            if (f != null)
+            {
+                Strobe_Delay = f.Value;
+            }
+            f = ps.GetFloat("Strobe_PulseWidth");
+            if (f != null)
+            {
+                Strobe_PulseWidth = f.Value;
+            }
+        }
+
+        public void Write(PvGenParameterArray ps)
+        {
+            ps.SetBooleanValue("Strobe_Invert", Strobe_Invert);
+            ps.SetFloatValue("Strobe_Delay", Strobe_Delay);
+            ps.SetFloatValue("Strobe_PulseWidth", Strobe_PulseWidth);
         }
     }
 }

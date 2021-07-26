@@ -225,12 +225,14 @@ namespace Imager
         {
             config.ImageFormat.Write(mDevice.Parameters);
             config.AcquisitionControl.Write(mDevice.Parameters);
+            config.Strobe.Write(mDevice.Parameters);
         }
 
         void DeviceUpdateToConfig()
         {
             config.ImageFormat.Read(mDevice.Parameters);
             config.AcquisitionControl.Read(mDevice.Parameters);
+            config.Strobe.Read(mDevice.Parameters);
         }
 
         void SaveConfig(string filepath = configpath, bool ismeta = false)
