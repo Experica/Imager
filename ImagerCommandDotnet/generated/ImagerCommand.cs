@@ -51,10 +51,28 @@ namespace Imager
     public delegate void Callback_Command_setRecordEpoch();
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_getDataFormat(string ret);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_setDataFormat();
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_getIsAcqusiting(bool ret);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_setIsAcqusiting();
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
     public delegate void Callback_Command_getIsRecording(bool ret);
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
     public delegate void Callback_Command_setIsRecording();
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_getIsAcqusitingAndRecording(bool ret);
+
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+    public delegate void Callback_Command_setIsAcqusitingAndRecording();
 }
 
 namespace Imager
@@ -110,6 +128,54 @@ namespace Imager
 
         void end_setRecordEpoch(global::Ice.AsyncResult asyncResult);
 
+        string getDataFormat(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task<string> getDataFormatAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_getDataFormat> begin_getDataFormat(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_getDataFormat(global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_getDataFormat(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        string end_getDataFormat(global::Ice.AsyncResult asyncResult);
+
+        void setDataFormat(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task setDataFormatAsync(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_setDataFormat> begin_setDataFormat(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_setDataFormat(string format, global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_setDataFormat(string format, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        void end_setDataFormat(global::Ice.AsyncResult asyncResult);
+
+        bool getIsAcqusiting(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task<bool> getIsAcqusitingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_getIsAcqusiting> begin_getIsAcqusiting(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_getIsAcqusiting(global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_getIsAcqusiting(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        bool end_getIsAcqusiting(global::Ice.AsyncResult asyncResult);
+
+        void setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task setIsAcqusitingAsync(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_setIsAcqusiting> begin_setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_setIsAcqusiting(bool isacqusiting, global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        void end_setIsAcqusiting(global::Ice.AsyncResult asyncResult);
+
         bool getIsRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
 
         global::System.Threading.Tasks.Task<bool> getIsRecordingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
@@ -133,6 +199,30 @@ namespace Imager
         global::Ice.AsyncResult begin_setIsRecording(bool isrecording, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
 
         void end_setIsRecording(global::Ice.AsyncResult asyncResult);
+
+        bool getIsAcqusitingAndRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task<bool> getIsAcqusitingAndRecordingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_getIsAcqusitingAndRecording> begin_getIsAcqusitingAndRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_getIsAcqusitingAndRecording(global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_getIsAcqusitingAndRecording(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        bool end_getIsAcqusitingAndRecording(global::Ice.AsyncResult asyncResult);
+
+        void setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::System.Threading.Tasks.Task setIsAcqusitingAndRecordingAsync(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken());
+
+        global::Ice.AsyncResult<Callback_Command_setIsAcqusitingAndRecording> begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext());
+
+        global::Ice.AsyncResult begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.AsyncCallback callback, object cookie);
+
+        global::Ice.AsyncResult begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie);
+
+        void end_setIsAcqusitingAndRecording(global::Ice.AsyncResult asyncResult);
     }
 }
 
@@ -154,10 +244,28 @@ namespace Imager
         void setRecordEpoch(string epoch, global::Ice.Current current = null);
 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        string getDataFormat(global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        void setDataFormat(string format, global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        bool getIsAcqusiting(global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        void setIsAcqusiting(bool isacqusiting, global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
         bool getIsRecording(global::Ice.Current current = null);
 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
         void setIsRecording(bool isrecording, global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        bool getIsAcqusitingAndRecording(global::Ice.Current current = null);
+
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("slice2cs", "3.7.5")]
+        void setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.Current current = null);
     }
 }
 
@@ -226,6 +334,54 @@ namespace Imager
             }
         }
 
+        public string getDataFormat(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                return _iceI_getDataFormatAsync(context, null, global::System.Threading.CancellationToken.None, true).Result;
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public void setDataFormat(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                _iceI_setDataFormatAsync(format, context, null, global::System.Threading.CancellationToken.None, true).Wait();
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public bool getIsAcqusiting(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                return _iceI_getIsAcqusitingAsync(context, null, global::System.Threading.CancellationToken.None, true).Result;
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public void setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                _iceI_setIsAcqusitingAsync(isacqusiting, context, null, global::System.Threading.CancellationToken.None, true).Wait();
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
         public bool getIsRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
         {
             try
@@ -243,6 +399,30 @@ namespace Imager
             try
             {
                 _iceI_setIsRecordingAsync(isrecording, context, null, global::System.Threading.CancellationToken.None, true).Wait();
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public bool getIsAcqusitingAndRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                return _iceI_getIsAcqusitingAndRecordingAsync(context, null, global::System.Threading.CancellationToken.None, true).Result;
+            }
+            catch(global::System.AggregateException ex_)
+            {
+                throw ex_.InnerException;
+            }
+        }
+
+        public void setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            try
+            {
+                _iceI_setIsAcqusitingAndRecordingAsync(isacqusitingandrecording, context, null, global::System.Threading.CancellationToken.None, true).Wait();
             }
             catch(global::System.AggregateException ex_)
             {
@@ -376,6 +556,128 @@ namespace Imager
                 });
         }
 
+        public global::System.Threading.Tasks.Task<string> getDataFormatAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_getDataFormatAsync(context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task<string> _iceI_getDataFormatAsync(global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            iceCheckTwowayOnly(_getDataFormat_name);
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<string>(progress, cancel);
+            _iceI_getDataFormat(context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _getDataFormat_name = "getDataFormat";
+
+        private void _iceI_getDataFormat(global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<string>(completed);
+            outAsync.invoke(
+                _getDataFormat_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                read: (global::Ice.InputStream istr) =>
+                {
+                    string ret;
+                    ret = istr.readString();
+                    return ret;
+                });
+        }
+
+        public global::System.Threading.Tasks.Task setDataFormatAsync(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_setDataFormatAsync(format, context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task _iceI_setDataFormatAsync(string iceP_format, global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<object>(progress, cancel);
+            _iceI_setDataFormat(iceP_format, context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _setDataFormat_name = "setDataFormat";
+
+        private void _iceI_setDataFormat(string iceP_format, global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<object>(completed);
+            outAsync.invoke(
+                _setDataFormat_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                write: (global::Ice.OutputStream ostr) =>
+                {
+                    ostr.writeString(iceP_format);
+                });
+        }
+
+        public global::System.Threading.Tasks.Task<bool> getIsAcqusitingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_getIsAcqusitingAsync(context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task<bool> _iceI_getIsAcqusitingAsync(global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            iceCheckTwowayOnly(_getIsAcqusiting_name);
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<bool>(progress, cancel);
+            _iceI_getIsAcqusiting(context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _getIsAcqusiting_name = "getIsAcqusiting";
+
+        private void _iceI_getIsAcqusiting(global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<bool>(completed);
+            outAsync.invoke(
+                _getIsAcqusiting_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                read: (global::Ice.InputStream istr) =>
+                {
+                    bool ret;
+                    ret = istr.readBool();
+                    return ret;
+                });
+        }
+
+        public global::System.Threading.Tasks.Task setIsAcqusitingAsync(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_setIsAcqusitingAsync(isacqusiting, context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task _iceI_setIsAcqusitingAsync(bool iceP_isacqusiting, global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<object>(progress, cancel);
+            _iceI_setIsAcqusiting(iceP_isacqusiting, context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _setIsAcqusiting_name = "setIsAcqusiting";
+
+        private void _iceI_setIsAcqusiting(bool iceP_isacqusiting, global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<object>(completed);
+            outAsync.invoke(
+                _setIsAcqusiting_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                write: (global::Ice.OutputStream ostr) =>
+                {
+                    ostr.writeBool(iceP_isacqusiting);
+                });
+        }
+
         public global::System.Threading.Tasks.Task<bool> getIsRecordingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
         {
             return _iceI_getIsRecordingAsync(context, progress, cancel, false);
@@ -434,6 +736,67 @@ namespace Imager
                 write: (global::Ice.OutputStream ostr) =>
                 {
                     ostr.writeBool(iceP_isrecording);
+                });
+        }
+
+        public global::System.Threading.Tasks.Task<bool> getIsAcqusitingAndRecordingAsync(global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_getIsAcqusitingAndRecordingAsync(context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task<bool> _iceI_getIsAcqusitingAndRecordingAsync(global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            iceCheckTwowayOnly(_getIsAcqusitingAndRecording_name);
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<bool>(progress, cancel);
+            _iceI_getIsAcqusitingAndRecording(context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _getIsAcqusitingAndRecording_name = "getIsAcqusitingAndRecording";
+
+        private void _iceI_getIsAcqusitingAndRecording(global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<bool>(completed);
+            outAsync.invoke(
+                _getIsAcqusitingAndRecording_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                read: (global::Ice.InputStream istr) =>
+                {
+                    bool ret;
+                    ret = istr.readBool();
+                    return ret;
+                });
+        }
+
+        public global::System.Threading.Tasks.Task setIsAcqusitingAndRecordingAsync(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext(), global::System.IProgress<bool> progress = null, global::System.Threading.CancellationToken cancel = new global::System.Threading.CancellationToken())
+        {
+            return _iceI_setIsAcqusitingAndRecordingAsync(isacqusitingandrecording, context, progress, cancel, false);
+        }
+
+        private global::System.Threading.Tasks.Task _iceI_setIsAcqusitingAndRecordingAsync(bool iceP_isacqusitingandrecording, global::Ice.OptionalContext context, global::System.IProgress<bool> progress, global::System.Threading.CancellationToken cancel, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationTaskCompletionCallback<object>(progress, cancel);
+            _iceI_setIsAcqusitingAndRecording(iceP_isacqusitingandrecording, context, synchronous, completed);
+            return completed.Task;
+        }
+
+        private const string _setIsAcqusitingAndRecording_name = "setIsAcqusitingAndRecording";
+
+        private void _iceI_setIsAcqusitingAndRecording(bool iceP_isacqusitingandrecording, global::System.Collections.Generic.Dictionary<string, string> context, bool synchronous, global::IceInternal.OutgoingAsyncCompletionCallback completed)
+        {
+            var outAsync = getOutgoingAsync<object>(completed);
+            outAsync.invoke(
+                _setIsAcqusitingAndRecording_name,
+                global::Ice.OperationMode.Normal,
+                global::Ice.FormatType.DefaultFormat,
+                context,
+                synchronous,
+                write: (global::Ice.OutputStream ostr) =>
+                {
+                    ostr.writeBool(iceP_isacqusitingandrecording);
                 });
         }
 
@@ -589,6 +952,154 @@ namespace Imager
             return completed;
         }
 
+        public global::Ice.AsyncResult<Callback_Command_getDataFormat> begin_getDataFormat(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_getDataFormat(context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_getDataFormat(global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getDataFormat(new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_getDataFormat(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getDataFormat(context, callback, cookie, false);
+        }
+
+        public string end_getDataFormat(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _getDataFormat_name);
+            var outgoing_ = (global::IceInternal.OutgoingAsyncT<string>)resultI_.OutgoingAsync;
+            return outgoing_.getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_getDataFormat> begin_getDataFormat(global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            iceCheckAsyncTwowayOnly(_getDataFormat_name);
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_getDataFormat, string>(
+                (Callback_Command_getDataFormat cb, string ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke(ret);
+                    }
+                },
+                this, _getDataFormat_name, cookie, completedCallback);
+            _iceI_getDataFormat(context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_setDataFormat> begin_setDataFormat(string format, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_setDataFormat(format, context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_setDataFormat(string format, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setDataFormat(format, new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_setDataFormat(string format, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setDataFormat(format, context, callback, cookie, false);
+        }
+
+        public void end_setDataFormat(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _setDataFormat_name);
+            ((global::IceInternal.OutgoingAsyncT<object>)resultI_.OutgoingAsync).getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_setDataFormat> begin_setDataFormat(string iceP_format, global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_setDataFormat, object>(
+                (Callback_Command_setDataFormat cb, object ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke();
+                    }
+                },
+                this, _setDataFormat_name, cookie, completedCallback);
+            _iceI_setDataFormat(iceP_format, context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_getIsAcqusiting> begin_getIsAcqusiting(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_getIsAcqusiting(context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_getIsAcqusiting(global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getIsAcqusiting(new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_getIsAcqusiting(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getIsAcqusiting(context, callback, cookie, false);
+        }
+
+        public bool end_getIsAcqusiting(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _getIsAcqusiting_name);
+            var outgoing_ = (global::IceInternal.OutgoingAsyncT<bool>)resultI_.OutgoingAsync;
+            return outgoing_.getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_getIsAcqusiting> begin_getIsAcqusiting(global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            iceCheckAsyncTwowayOnly(_getIsAcqusiting_name);
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_getIsAcqusiting, bool>(
+                (Callback_Command_getIsAcqusiting cb, bool ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke(ret);
+                    }
+                },
+                this, _getIsAcqusiting_name, cookie, completedCallback);
+            _iceI_getIsAcqusiting(context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_setIsAcqusiting> begin_setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_setIsAcqusiting(isacqusiting, context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_setIsAcqusiting(bool isacqusiting, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setIsAcqusiting(isacqusiting, new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_setIsAcqusiting(bool isacqusiting, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setIsAcqusiting(isacqusiting, context, callback, cookie, false);
+        }
+
+        public void end_setIsAcqusiting(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _setIsAcqusiting_name);
+            ((global::IceInternal.OutgoingAsyncT<object>)resultI_.OutgoingAsync).getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_setIsAcqusiting> begin_setIsAcqusiting(bool iceP_isacqusiting, global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_setIsAcqusiting, object>(
+                (Callback_Command_setIsAcqusiting cb, object ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke();
+                    }
+                },
+                this, _setIsAcqusiting_name, cookie, completedCallback);
+            _iceI_setIsAcqusiting(iceP_isacqusiting, context, synchronous, completed);
+            return completed;
+        }
+
         public global::Ice.AsyncResult<Callback_Command_getIsRecording> begin_getIsRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
         {
             return begin_getIsRecording(context, null, null, false);
@@ -660,6 +1171,80 @@ namespace Imager
                 },
                 this, _setIsRecording_name, cookie, completedCallback);
             _iceI_setIsRecording(iceP_isrecording, context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_getIsAcqusitingAndRecording> begin_getIsAcqusitingAndRecording(global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_getIsAcqusitingAndRecording(context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_getIsAcqusitingAndRecording(global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getIsAcqusitingAndRecording(new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_getIsAcqusitingAndRecording(global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_getIsAcqusitingAndRecording(context, callback, cookie, false);
+        }
+
+        public bool end_getIsAcqusitingAndRecording(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _getIsAcqusitingAndRecording_name);
+            var outgoing_ = (global::IceInternal.OutgoingAsyncT<bool>)resultI_.OutgoingAsync;
+            return outgoing_.getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_getIsAcqusitingAndRecording> begin_getIsAcqusitingAndRecording(global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            iceCheckAsyncTwowayOnly(_getIsAcqusitingAndRecording_name);
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_getIsAcqusitingAndRecording, bool>(
+                (Callback_Command_getIsAcqusitingAndRecording cb, bool ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke(ret);
+                    }
+                },
+                this, _getIsAcqusitingAndRecording_name, cookie, completedCallback);
+            _iceI_getIsAcqusitingAndRecording(context, synchronous, completed);
+            return completed;
+        }
+
+        public global::Ice.AsyncResult<Callback_Command_setIsAcqusitingAndRecording> begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context = new global::Ice.OptionalContext())
+        {
+            return begin_setIsAcqusitingAndRecording(isacqusitingandrecording, context, null, null, false);
+        }
+
+        public global::Ice.AsyncResult begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setIsAcqusitingAndRecording(isacqusitingandrecording, new global::Ice.OptionalContext(), callback, cookie, false);
+        }
+
+        public global::Ice.AsyncResult begin_setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.OptionalContext context, global::Ice.AsyncCallback callback, object cookie)
+        {
+            return begin_setIsAcqusitingAndRecording(isacqusitingandrecording, context, callback, cookie, false);
+        }
+
+        public void end_setIsAcqusitingAndRecording(global::Ice.AsyncResult asyncResult)
+        {
+            var resultI_ = global::IceInternal.AsyncResultI.check(asyncResult, this, _setIsAcqusitingAndRecording_name);
+            ((global::IceInternal.OutgoingAsyncT<object>)resultI_.OutgoingAsync).getResult(resultI_.wait());
+        }
+
+        private global::Ice.AsyncResult<Callback_Command_setIsAcqusitingAndRecording> begin_setIsAcqusitingAndRecording(bool iceP_isacqusitingandrecording, global::System.Collections.Generic.Dictionary<string, string> context, global::Ice.AsyncCallback completedCallback, object cookie, bool synchronous)
+        {
+            var completed = new global::IceInternal.OperationAsyncResultCompletionCallback<Callback_Command_setIsAcqusitingAndRecording, object>(
+                (Callback_Command_setIsAcqusitingAndRecording cb, object ret) =>
+                {
+                    if(cb != null)
+                    {
+                        cb.Invoke();
+                    }
+                },
+                this, _setIsAcqusitingAndRecording_name, cookie, completedCallback);
+            _iceI_setIsAcqusitingAndRecording(iceP_isacqusitingandrecording, context, synchronous, completed);
             return completed;
         }
 
@@ -823,9 +1408,21 @@ namespace Imager
 
         public abstract void setRecordEpoch(string epoch, global::Ice.Current current = null);
 
+        public abstract string getDataFormat(global::Ice.Current current = null);
+
+        public abstract void setDataFormat(string format, global::Ice.Current current = null);
+
+        public abstract bool getIsAcqusiting(global::Ice.Current current = null);
+
+        public abstract void setIsAcqusiting(bool isacqusiting, global::Ice.Current current = null);
+
         public abstract bool getIsRecording(global::Ice.Current current = null);
 
         public abstract void setIsRecording(bool isrecording, global::Ice.Current current = null);
+
+        public abstract bool getIsAcqusitingAndRecording(global::Ice.Current current = null);
+
+        public abstract void setIsAcqusitingAndRecording(bool isacqusitingandrecording, global::Ice.Current current = null);
 
         #endregion
 
@@ -915,6 +1512,58 @@ namespace Imager
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
         public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_getDataFormat(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            inS.readEmptyParams();
+            var ret = obj.getDataFormat(current);
+            var ostr = inS.startWriteParams();
+            ostr.writeString(ret);
+            inS.endWriteParams(ostr);
+            return inS.setResult(ostr);
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_setDataFormat(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            var istr = inS.startReadParams();
+            string iceP_format;
+            iceP_format = istr.readString();
+            inS.endReadParams();
+            obj.setDataFormat(iceP_format, current);
+            return inS.setResult(inS.writeEmptyParams());
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_getIsAcqusiting(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            inS.readEmptyParams();
+            var ret = obj.getIsAcqusiting(current);
+            var ostr = inS.startWriteParams();
+            ostr.writeBool(ret);
+            inS.endWriteParams(ostr);
+            return inS.setResult(ostr);
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_setIsAcqusiting(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            var istr = inS.startReadParams();
+            bool iceP_isacqusiting;
+            iceP_isacqusiting = istr.readBool();
+            inS.endReadParams();
+            obj.setIsAcqusiting(iceP_isacqusiting, current);
+            return inS.setResult(inS.writeEmptyParams());
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
         iceD_getIsRecording(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
         {
             global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
@@ -939,8 +1588,37 @@ namespace Imager
             return inS.setResult(inS.writeEmptyParams());
         }
 
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_getIsAcqusitingAndRecording(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            inS.readEmptyParams();
+            var ret = obj.getIsAcqusitingAndRecording(current);
+            var ostr = inS.startWriteParams();
+            ostr.writeBool(ret);
+            inS.endWriteParams(ostr);
+            return inS.setResult(ostr);
+        }
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011")]
+        public static global::System.Threading.Tasks.Task<global::Ice.OutputStream>
+        iceD_setIsAcqusitingAndRecording(Command obj, global::IceInternal.Incoming inS, global::Ice.Current current)
+        {
+            global::Ice.ObjectImpl.iceCheckMode(global::Ice.OperationMode.Normal, current.mode);
+            var istr = inS.startReadParams();
+            bool iceP_isacqusitingandrecording;
+            iceP_isacqusitingandrecording = istr.readBool();
+            inS.endReadParams();
+            obj.setIsAcqusitingAndRecording(iceP_isacqusitingandrecording, current);
+            return inS.setResult(inS.writeEmptyParams());
+        }
+
         private static readonly string[] _all =
         {
+            "getDataFormat",
+            "getIsAcqusiting",
+            "getIsAcqusitingAndRecording",
             "getIsRecording",
             "getRecordEpoch",
             "getRecordPath",
@@ -948,6 +1626,9 @@ namespace Imager
             "ice_ids",
             "ice_isA",
             "ice_ping",
+            "setDataFormat",
+            "setIsAcqusiting",
+            "setIsAcqusitingAndRecording",
             "setIsRecording",
             "setRecordEpoch",
             "setRecordPath"
@@ -966,41 +1647,65 @@ namespace Imager
             {
                 case 0:
                 {
-                    return iceD_getIsRecording(this, inS, current);
+                    return iceD_getDataFormat(this, inS, current);
                 }
                 case 1:
                 {
-                    return iceD_getRecordEpoch(this, inS, current);
+                    return iceD_getIsAcqusiting(this, inS, current);
                 }
                 case 2:
                 {
-                    return iceD_getRecordPath(this, inS, current);
+                    return iceD_getIsAcqusitingAndRecording(this, inS, current);
                 }
                 case 3:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_id(this, inS, current);
+                    return iceD_getIsRecording(this, inS, current);
                 }
                 case 4:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_ids(this, inS, current);
+                    return iceD_getRecordEpoch(this, inS, current);
                 }
                 case 5:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_isA(this, inS, current);
+                    return iceD_getRecordPath(this, inS, current);
                 }
                 case 6:
                 {
-                    return global::Ice.ObjectImpl.iceD_ice_ping(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_id(this, inS, current);
                 }
                 case 7:
                 {
-                    return iceD_setIsRecording(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_ids(this, inS, current);
                 }
                 case 8:
                 {
-                    return iceD_setRecordEpoch(this, inS, current);
+                    return global::Ice.ObjectImpl.iceD_ice_isA(this, inS, current);
                 }
                 case 9:
+                {
+                    return global::Ice.ObjectImpl.iceD_ice_ping(this, inS, current);
+                }
+                case 10:
+                {
+                    return iceD_setDataFormat(this, inS, current);
+                }
+                case 11:
+                {
+                    return iceD_setIsAcqusiting(this, inS, current);
+                }
+                case 12:
+                {
+                    return iceD_setIsAcqusitingAndRecording(this, inS, current);
+                }
+                case 13:
+                {
+                    return iceD_setIsRecording(this, inS, current);
+                }
+                case 14:
+                {
+                    return iceD_setRecordEpoch(this, inS, current);
+                }
+                case 15:
                 {
                     return iceD_setRecordPath(this, inS, current);
                 }

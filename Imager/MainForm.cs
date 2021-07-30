@@ -50,6 +50,7 @@ namespace Imager
         Action mRecordStoppedHandler = null;
 
         public Action<bool> mRecordCheckedHandler = null;
+        public Action<bool> mPlayCheckedHandler = null;
 
         // Main application objects: device, stream, pipeline
         private PvDevice mDevice = null;
@@ -86,6 +87,7 @@ namespace Imager
             mAcquisitionStateChangedHandler += OnAcquisitionStateChanged;
             mRecordStoppedHandler += OnRecordStopped;
             mRecordCheckedHandler += OnRecordChecked;
+            mPlayCheckedHandler += OnPlayChecked;
 
             // Set browser form owners
             mCommBrowser.Owner = this;
@@ -529,7 +531,7 @@ namespace Imager
 
         void DisplayThread_OnBufferDisplay(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
         {
-            if (!isdisplay) { return; }
+            if (aBuffer == null || !isdisplay) { return; }
 
             if (iscolormap && config.ColorMap != null)
             {
@@ -849,6 +851,11 @@ namespace Imager
             {
                 recorder.RecordStatus = RecordStatus.Stopping;
             }
+        }
+
+        void OnPlayChecked(bool check)
+        {
+            Play.Checked = check;
         }
 
         void Play_CheckedChanged(object sender, EventArgs e)

@@ -66,5 +66,43 @@ namespace Imager
         {
             mainform.recorder.RecordEpoch = epoch;
         }
+
+        public override string getDataFormat(Current current = null)
+        {
+            return mainform.recorder.DataFormat.ToString();
+        }
+
+        public override void setDataFormat(string format, Current current = null)
+        {
+            if (Enum.TryParse(format, out DataFormat fmt))
+            {
+                mainform.recorder.DataFormat = fmt;
+            }
+            else
+            {
+                MessageBox.Show($"DataFormat: {format} Not Supported.", "Command", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public override bool getIsAcqusiting(Current current = null)
+        {
+            return mainform.Play.Checked;
+        }
+
+        public override void setIsAcqusiting(bool isacqusiting, Current current = null)
+        {
+            mainform.BeginInvoke(mainform.mRecordCheckedHandler, isacqusiting);
+        }
+
+        public override bool getIsAcqusitingAndRecording(Current current = null)
+        {
+            return getIsAcqusiting(current) && getIsRecording(current);
+        }
+
+        public override void setIsAcqusitingAndRecording(bool isacqusitingandrecording, Current current = null)
+        {
+            setIsAcqusiting(isacqusitingandrecording, current);
+            setIsRecording(isacqusitingandrecording, current);
+        }
     }
 }

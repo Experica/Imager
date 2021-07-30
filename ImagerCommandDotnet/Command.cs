@@ -70,10 +70,28 @@ namespace ImagerCommand
             set { command.setRecordEpoch(value); }
         }
 
+        public string DataFormat
+        {
+            get { return command.getDataFormat(); }
+            set { command.setDataFormat(value); }
+        }
+
+        public bool IsAcqusiting
+        {
+            get { return command.getIsAcqusiting(); }
+            set { command.setIsAcqusiting(value); }
+        }
+
         public bool IsRecording
         {
             get { return command.getIsRecording(); }
             set { command.setIsRecording(value); }
+        }
+
+        public bool IsAcqusitingAndRecording
+        {
+            get { return command.getIsAcqusitingAndRecording(); }
+            set { command.setIsAcqusitingAndRecording(value); }
         }
     }
 }

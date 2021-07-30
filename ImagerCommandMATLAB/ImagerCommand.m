@@ -67,6 +67,38 @@ classdef ImagerCommand < handle
             end
         end
         
+        function SetDataFormat(obj,format)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                obj.command.setDataFormat(format);
+            end
+        end
+        
+        function [format] = GetDataFormat(obj)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                format = obj.command.getDataFormat();
+            end
+        end
+        
+        function SetIsAcqusiting(obj,isacqusiting)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                obj.command.setIsAcqusiting(isacqusiting);
+            end
+        end
+        
+        function [isacqusiting] = GetIsAcqusiting(obj)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                isacqusiting = obj.command.getIsAcqusiting();
+            end
+        end
+        
         function SetIsRecording(obj,isrecording)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
@@ -82,6 +114,23 @@ classdef ImagerCommand < handle
                 isrecording = obj.command.getIsRecording();
             end
         end
+        
+        function SetIsAcqusitingAndRecording(obj,isacqusitingandrecording)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                obj.command.setIsAcqusitingAndRecording(isacqusitingandrecording);
+            end
+        end
+        
+        function [isacqusitingandrecording] = GetIsAcqusitingAndRecording(obj)
+            if isempty(obj.command)
+                warning('No Command Proxy, Connect First.');
+            else
+                isacqusitingandrecording = obj.command.getIsAcqusitingAndRecording();
+            end
+        end
+        
     end
 end
 
