@@ -91,7 +91,7 @@ namespace Imager
 
         public override void setIsAcqusiting(bool isacqusiting, Current current = null)
         {
-            mainform.BeginInvoke(mainform.mRecordCheckedHandler, isacqusiting);
+            mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacqusiting);
         }
 
         public override bool getIsAcqusitingAndRecording(Current current = null)
