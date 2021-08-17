@@ -88,10 +88,14 @@ namespace ImagerCommand
             set { command.setIsRecording(value); }
         }
 
-        public bool IsAcqusitingAndRecording
+        public bool StartRecordAndAcqusite()
         {
-            get { return command.getIsAcqusitingAndRecording(); }
-            set { command.setIsAcqusitingAndRecording(value); }
+            return command.StartRecordAndAcqusite();
+        }
+
+        public bool StopAcqusiteAndRecord()
+        {
+            return command.StopAcqusiteAndRecord();
         }
     }
 }

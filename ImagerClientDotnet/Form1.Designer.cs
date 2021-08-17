@@ -56,6 +56,9 @@ namespace ImagerClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.RecordPath = new System.Windows.Forms.TextBox();
+            this.Play = new System.Windows.Forms.CheckBox();
+            this.StartRecordPlay = new System.Windows.Forms.Button();
+            this.StopPlayRecord = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Port)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,11 +135,50 @@ namespace ImagerClient
             this.RecordPath.Size = new System.Drawing.Size(120, 20);
             this.RecordPath.TabIndex = 6;
             // 
+            // Play
+            // 
+            this.Play.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Play.AutoSize = true;
+            this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Play.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Play.Location = new System.Drawing.Point(636, 49);
+            this.Play.Name = "Play";
+            this.Play.Size = new System.Drawing.Size(65, 36);
+            this.Play.TabIndex = 7;
+            this.Play.Text = "Play";
+            this.Play.UseVisualStyleBackColor = true;
+            this.Play.CheckedChanged += new System.EventHandler(this.Play_CheckedChanged);
+            // 
+            // StartRecordPlay
+            // 
+            this.StartRecordPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartRecordPlay.Location = new System.Drawing.Point(548, 184);
+            this.StartRecordPlay.Name = "StartRecordPlay";
+            this.StartRecordPlay.Size = new System.Drawing.Size(105, 40);
+            this.StartRecordPlay.TabIndex = 10;
+            this.StartRecordPlay.Text = "StartRecordPlay";
+            this.StartRecordPlay.UseVisualStyleBackColor = true;
+            this.StartRecordPlay.Click += new System.EventHandler(this.StartRecordPlay_Click);
+            // 
+            // StopPlayRecord
+            // 
+            this.StopPlayRecord.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StopPlayRecord.Location = new System.Drawing.Point(683, 184);
+            this.StopPlayRecord.Name = "StopPlayRecord";
+            this.StopPlayRecord.Size = new System.Drawing.Size(105, 40);
+            this.StopPlayRecord.TabIndex = 11;
+            this.StopPlayRecord.Text = "StopPlayRecord";
+            this.StopPlayRecord.UseVisualStyleBackColor = true;
+            this.StopPlayRecord.Click += new System.EventHandler(this.StopPlayRecord_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.StopPlayRecord);
+            this.Controls.Add(this.StartRecordPlay);
+            this.Controls.Add(this.Play);
             this.Controls.Add(this.RecordPath);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -163,6 +205,9 @@ namespace ImagerClient
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox RecordPath;
+        private System.Windows.Forms.CheckBox Play;
+        private System.Windows.Forms.Button StartRecordPlay;
+        private System.Windows.Forms.Button StopPlayRecord;
     }
 }
 

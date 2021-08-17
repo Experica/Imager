@@ -46,9 +46,16 @@ namespace Imager
 
     public class Recorder
     {
+        readonly object call = new object();
         PvBufferWriter bufferWriter = new PvBufferWriter();
         PvMp4Writer mp4Writer = new PvMp4Writer();
-        public RecordStatus RecordStatus = RecordStatus.None;
+
+        RecordStatus _recordstatus = RecordStatus.None;
+        public RecordStatus RecordStatus
+        {
+            get { lock (call) { return _recordstatus; } }
+            set { lock (call) { _recordstatus = value; } }
+        }
         public DataFormat DataFormat = DataFormat.TIFF;
         public string RecordPath = null;
         public string RecordEpoch = "0";
@@ -74,7 +81,19 @@ namespace Imager
             BytesWritten = 0;
         }
 
-        public bool SaveImage(PvBuffer pvBuffer)
+        public bool RecordImage(PvBuffer pvBuffer)
+        {
+            lock (call)
+            {
+                if (_recordstatus == RecordStatus.Recording)
+                {
+                    return SaveImage(pvBuffer);
+                }
+                return false;
+            }
+        }
+
+        bool SaveImage(PvBuffer pvBuffer)
         {
             if (pvBuffer == null) { return false; }
             switch (DataFormat)
@@ -101,19 +120,15 @@ namespace Imager
             bool hr = false;
             if (!IsFormatVedio)
             {
-                var pvbuffer = displayThread.RetrieveLatestBuffer();
-                if (pvbuffer != null)
-                {
-                    hr = SaveImage(pvbuffer);
-                    displayThread.ReleaseLatestBuffer();
-                }
+                hr = SaveImage(displayThread.RetrieveLatestBuffer());
+                displayThread.ReleaseLatestBuffer();
             }
             return hr;
         }
 
         public bool IsFormatVedio { get { return DataFormat == DataFormat.MP4; } }
 
-        public void SaveMP4(PvBuffer pvBuffer)
+        void SaveMP4(PvBuffer pvBuffer)
         {
             if (!mp4Writer.IsOpened())
             {
@@ -124,9 +139,12 @@ namespace Imager
 
         public void StopMP4()
         {
-            if (mp4Writer.IsOpened())
+            lock (call)
             {
-                mp4Writer.Close();
+                if (mp4Writer.IsOpened())
+                {
+                    mp4Writer.Close();
+                }
             }
         }
 

@@ -86,6 +86,7 @@ namespace Imager
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.AvgBitRate = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
@@ -210,7 +211,7 @@ namespace Imager
             this.Play.FlatAppearance.CheckedBackColor = System.Drawing.Color.Pink;
             this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Play.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Play.Location = new System.Drawing.Point(8, 64);
+            this.Play.Location = new System.Drawing.Point(11, 64);
             this.Play.Name = "Play";
             this.Play.Size = new System.Drawing.Size(68, 36);
             this.Play.TabIndex = 6;
@@ -223,9 +224,9 @@ namespace Imager
             // 
             this.SaveImage.Enabled = false;
             this.SaveImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveImage.Location = new System.Drawing.Point(85, 59);
+            this.SaveImage.Location = new System.Drawing.Point(91, 61);
             this.SaveImage.Name = "SaveImage";
-            this.SaveImage.Size = new System.Drawing.Size(75, 44);
+            this.SaveImage.Size = new System.Drawing.Size(60, 42);
             this.SaveImage.TabIndex = 5;
             this.SaveImage.Text = "Save Image";
             this.SaveImage.UseVisualStyleBackColor = true;
@@ -239,7 +240,7 @@ namespace Imager
             this.Record.FlatAppearance.CheckedBackColor = System.Drawing.Color.Violet;
             this.Record.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Record.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Record.Location = new System.Drawing.Point(168, 64);
+            this.Record.Location = new System.Drawing.Point(163, 64);
             this.Record.Name = "Record";
             this.Record.Size = new System.Drawing.Size(144, 36);
             this.Record.TabIndex = 4;
@@ -492,6 +493,7 @@ namespace Imager
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // optionToolStripMenuItem
             // 
@@ -501,9 +503,18 @@ namespace Imager
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // groupBox5
             // 
@@ -756,6 +767,7 @@ namespace Imager
         public System.Windows.Forms.CheckBox Play;
         private System.Windows.Forms.CheckBox ColorMap;
         private System.Windows.Forms.CheckBox IsDisplay;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

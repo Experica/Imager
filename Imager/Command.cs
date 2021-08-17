@@ -31,78 +31,121 @@ namespace Imager
     public class CommandI : CommandDisp_
     {
         MainForm mainform;
+        int timeout;
 
-        public CommandI(MainForm form)
+        public CommandI(MainForm form, int timeout_millisecond = 1000)
         {
             mainform = form;
+            timeout = timeout_millisecond;
         }
 
         public override string getRecordPath(Current current = null)
         {
-            return mainform.recorder.RecordPath;
+            try
+            {
+                return mainform.recorder.RecordPath;
+            }
+            catch { return null; }
         }
 
-        public override void setRecordPath(string path, Current current = null)
+        public override bool setRecordPath(string path, Current current = null)
         {
-            mainform.recorder.RecordPath = path;
-        }
-
-        public override bool getIsRecording(Current current = null)
-        {
-            return mainform.recorder.RecordStatus == RecordStatus.Recording;
-        }
-
-        public override void setIsRecording(bool isrecording, Current current = null)
-        {
-            mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording);
+            try
+            {
+                mainform.recorder.RecordPath = path;
+                return true;
+            }
+            catch { return false; }
         }
 
         public override string getRecordEpoch(Current current = null)
         {
-            return mainform.recorder.RecordEpoch;
+            try
+            {
+                return mainform.recorder.RecordEpoch;
+            }
+            catch { return null; }
         }
 
-        public override void setRecordEpoch(string epoch, Current current = null)
+        public override bool setRecordEpoch(string epoch, Current current = null)
         {
-            mainform.recorder.RecordEpoch = epoch;
+            try
+            {
+                mainform.recorder.RecordEpoch = epoch;
+                return true;
+            }
+            catch { return false; }
         }
 
         public override string getDataFormat(Current current = null)
         {
-            return mainform.recorder.DataFormat.ToString();
+            try
+            {
+                return mainform.recorder.DataFormat.ToString();
+            }
+            catch { return null; }
         }
 
-        public override void setDataFormat(string format, Current current = null)
+        public override bool setDataFormat(string format, Current current = null)
         {
             if (Enum.TryParse(format, out DataFormat fmt))
             {
                 mainform.recorder.DataFormat = fmt;
+                return true;
             }
             else
             {
-                MessageBox.Show($"DataFormat: {format} Not Supported.", "Command", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
         }
 
         public override bool getIsAcqusiting(Current current = null)
         {
-            return mainform.Play.Checked;
+            try
+            {
+                return mainform.IsAcquisiting;
+            }
+            catch { return false; }
         }
 
-        public override void setIsAcqusiting(bool isacqusiting, Current current = null)
+        public override bool setIsAcqusiting(bool isacqusiting, Current current = null)
         {
-            mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacqusiting);
+            try
+            {
+                var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacqusiting);
+                ar.AsyncWaitHandle.WaitOne(timeout);
+                if (ar.IsCompleted) { return true; } else { return false; }
+            }
+            catch { return false; }
+        }
+        public override bool getIsRecording(Current current = null)
+        {
+            try
+            {
+                return mainform.recorder.RecordStatus == RecordStatus.Recording;
+            }
+            catch { return false; }
         }
 
-        public override bool getIsAcqusitingAndRecording(Current current = null)
+        public override bool setIsRecording(bool isrecording, Current current = null)
         {
-            return getIsAcqusiting(current) && getIsRecording(current);
+            try
+            {
+                var ar = mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording);
+                ar.AsyncWaitHandle.WaitOne(timeout);
+                if (ar.IsCompleted) { return true; } else { return false; }
+            }
+            catch { return false; }
         }
 
-        public override void setIsAcqusitingAndRecording(bool isacqusitingandrecording, Current current = null)
+        public override bool StartRecordAndAcqusite(Current current = null)
         {
-            setIsAcqusiting(isacqusitingandrecording, current);
-            setIsRecording(isacqusitingandrecording, current);
+            return setIsRecording(true) && setIsAcqusiting(true);
+        }
+
+        public override bool StopAcqusiteAndRecord(Current current = null)
+        {
+            return setIsAcqusiting(false) && setIsRecording(false);
         }
     }
 }

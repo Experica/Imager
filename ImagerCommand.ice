@@ -3,21 +3,21 @@
     interface Command
     {
         string getRecordPath();
-        void setRecordPath(string path);
+        bool setRecordPath(string path);
 
         string getRecordEpoch();
-        void setRecordEpoch(string epoch);
+        bool setRecordEpoch(string epoch);
 
         string getDataFormat();
-        void setDataFormat(string format);
+        bool setDataFormat(string format);
 
         bool getIsAcqusiting();
-        void setIsAcqusiting(bool isacqusiting);
+        bool setIsAcqusiting(bool isacqusiting);
 
         bool getIsRecording();
-        void setIsRecording(bool isrecording);
+        bool setIsRecording(bool isrecording);
 
-        bool getIsAcqusitingAndRecording();
-        void setIsAcqusitingAndRecording(bool isacqusitingandrecording);
+        bool StartRecordAndAcqusite();
+        bool StopAcqusiteAndRecord();
     }
 }

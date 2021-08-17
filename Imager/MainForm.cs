@@ -47,8 +47,6 @@ namespace Imager
         // Handler used to bring acquisition state manager callbacks in the main UI thread
         Action mAcquisitionStateChangedHandler = null;
 
-        Action mRecordStoppedHandler = null;
-
         public Action<bool> mRecordCheckedHandler = null;
         public Action<bool> mPlayCheckedHandler = null;
 
@@ -85,7 +83,6 @@ namespace Imager
             mDisconnectedHandler += OnDisconnected;
             mAcquisitionModeChangedHandler += OnAcquisitionModeChanged;
             mAcquisitionStateChangedHandler += OnAcquisitionStateChanged;
-            mRecordStoppedHandler += OnRecordStopped;
             mRecordCheckedHandler += OnRecordChecked;
             mPlayCheckedHandler += OnPlayChecked;
 
@@ -274,6 +271,11 @@ namespace Imager
             streamButton.Enabled = mDevice != null;
         }
 
+        public bool IsAcquisiting
+        {
+            get { return mAcquisitionManager?.State == PvAcquisitionState.Locked; }
+        }
+
         void EnableAcquisitionUI()
         {
             if (mAcquisitionManager == null)
@@ -281,20 +283,19 @@ namespace Imager
                 // Not connected, disable all
                 modeComboBox.Enabled = false;
                 Play.Enabled = false;
-                Play.BackColor = DefaultBackColor;
                 SaveImage.Enabled = false;
                 Record.Enabled = false;
+                Play.BackColor = DefaultBackColor;
                 Record.BackColor = DefaultBackColor;
             }
             else
             {
                 Play.Enabled = true;
+                Record.Enabled = true;
+                SaveImage.Enabled = true;
+                modeComboBox.Enabled = !IsAcquisiting;
                 Play.BackColor = Color.PaleGreen;
-                var isplaying = mAcquisitionManager.State == PvAcquisitionState.Locked;
-                modeComboBox.Enabled = !isplaying;
-                SaveImage.Enabled = isplaying;
-                Record.Enabled = isplaying;
-                Record.BackColor = isplaying ? Color.LightSkyBlue : DefaultBackColor;
+                Record.BackColor = Color.LightSkyBlue;
             }
         }
 
@@ -562,17 +563,7 @@ namespace Imager
 
         void DisplayThread_OnBufferDone(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
         {
-            switch (recorder.RecordStatus)
-            {
-                case RecordStatus.Recording:
-                    recorder.SaveImage(aBuffer);
-                    return;
-                case RecordStatus.Stopping:
-                    recorder.StopMP4();
-                    BeginInvoke(mRecordStoppedHandler);
-                    recorder.RecordStatus = RecordStatus.Stopped;
-                    return;
-            }
+            recorder.RecordImage(aBuffer);
         }
 
         void OnRecordStopped()
@@ -710,12 +701,12 @@ namespace Imager
             // Reset display thread stats
             mDisplayThread.ResetStatistics();
 
-            // Use acquisition manager to send the acquisition start command to the device
-            mAcquisitionManager.Start();
-
             // Raise priority when acquisiting
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
+
+            // Use acquisition manager to send the acquisition start command to the device
+            mAcquisitionManager.Start();
         }
 
         void StopAcquisition()
@@ -849,7 +840,9 @@ namespace Imager
             }
             else
             {
-                recorder.RecordStatus = RecordStatus.Stopping;
+                recorder.RecordStatus = RecordStatus.Stopped;
+                recorder.StopMP4();
+                OnRecordStopped();
             }
         }
 
@@ -916,6 +909,16 @@ namespace Imager
         void IsDisplay_CheckedChanged(object sender, EventArgs e)
         {
             isdisplay = IsDisplay.Checked;
+        }
+
+        void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
         }
     }
 }

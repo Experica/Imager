@@ -66,5 +66,26 @@ namespace ImagerClient
             }
             command.IsRecording = Record.Checked;
         }
+
+        private void Play_CheckedChanged(object sender, EventArgs e)
+        {
+            command.IsAcqusiting = Play.Checked;
+        }
+
+        private void StartRecordPlay_Click(object sender, EventArgs e)
+        {
+            if(!command.StartRecordAndAcqusite())
+            {
+                MessageBox.Show("unsuccessful starting record and acqusition.");
+            }
+        }
+
+        private void StopPlayRecord_Click(object sender, EventArgs e)
+        {
+            if(!command.StopAcqusiteAndRecord())
+            {
+                MessageBox.Show("unsuccessful stopping acqusition and record.");
+            }
+        }
     }
 }
