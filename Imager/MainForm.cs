@@ -292,8 +292,9 @@ namespace Imager
             {
                 Play.Enabled = true;
                 Record.Enabled = true;
-                SaveImage.Enabled = true;
-                modeComboBox.Enabled = !IsAcquisiting;
+                var isacquisiting = IsAcquisiting;
+                SaveImage.Enabled = isacquisiting && !recorder.IsRecording;
+                modeComboBox.Enabled = !isacquisiting;
                 Play.BackColor = Color.PaleGreen;
                 Record.BackColor = Color.LightSkyBlue;
             }
@@ -844,6 +845,7 @@ namespace Imager
                 recorder.StopMP4();
                 OnRecordStopped();
             }
+            EnableAcquisitionUI();
         }
 
         void OnPlayChecked(bool check)

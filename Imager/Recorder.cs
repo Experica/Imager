@@ -56,6 +56,10 @@ namespace Imager
             get { lock (call) { return _recordstatus; } }
             set { lock (call) { _recordstatus = value; } }
         }
+        public bool IsRecording
+        {
+            get { lock (call) { return _recordstatus == RecordStatus.Recording; } }
+        }
         public DataFormat DataFormat = DataFormat.TIFF;
         public string RecordPath = null;
         public string RecordEpoch = "0";
@@ -117,13 +121,16 @@ namespace Imager
 
         public bool SaveCurrentImage(PvDisplayThread displayThread)
         {
-            bool hr = false;
-            if (!IsFormatVedio)
+            lock (call)
             {
-                hr = SaveImage(displayThread.RetrieveLatestBuffer());
-                displayThread.ReleaseLatestBuffer();
+                bool hr = false;
+                if (!IsFormatVedio)
+                {
+                    hr = SaveImage(displayThread.RetrieveLatestBuffer());
+                    displayThread.ReleaseLatestBuffer();
+                }
+                return hr;
             }
-            return hr;
         }
 
         public bool IsFormatVedio { get { return DataFormat == DataFormat.MP4; } }
