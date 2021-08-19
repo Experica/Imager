@@ -99,7 +99,7 @@ namespace Imager
             }
         }
 
-        public override bool getIsAcqusiting(Current current = null)
+        public override bool getIsAcquisiting(Current current = null)
         {
             try
             {
@@ -108,11 +108,11 @@ namespace Imager
             catch { return false; }
         }
 
-        public override bool setIsAcqusiting(bool isacqusiting, Current current = null)
+        public override bool setIsAcquisiting(bool isacquisiting, Current current = null)
         {
             try
             {
-                var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacqusiting);
+                var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacquisiting);
                 ar.AsyncWaitHandle.WaitOne(timeout);
                 if (ar.IsCompleted) { return true; } else { return false; }
             }
@@ -138,14 +138,14 @@ namespace Imager
             catch { return false; }
         }
 
-        public override bool StartRecordAndAcqusite(Current current = null)
+        public override bool StartRecordAndAcquisite(Current current = null)
         {
-            return setIsRecording(true) && setIsAcqusiting(true);
+            return setIsRecording(true) && setIsAcquisiting(true);
         }
 
-        public override bool StopAcqusiteAndRecord(Current current = null)
+        public override bool StopAcquisiteAndRecord(Current current = null)
         {
-            return setIsAcqusiting(false) && setIsRecording(false);
+            return setIsAcquisiting(false) && setIsRecording(false);
         }
     }
 }

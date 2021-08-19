@@ -45,7 +45,7 @@ namespace ImagerClient
         {
             try
             {
-                command.Connect(IP.Text,(uint)Port.Value);
+                command.Connect(IP.Text, (uint)Port.Value);
             }
             catch (Exception exc)
             {
@@ -60,7 +60,7 @@ namespace ImagerClient
 
         private void Record_CheckedChanged(object sender, EventArgs e)
         {
-            if(Record.Checked)
+            if (Record.Checked)
             {
                 command.RecordPath = RecordPath.Text;
             }
@@ -69,12 +69,12 @@ namespace ImagerClient
 
         private void Play_CheckedChanged(object sender, EventArgs e)
         {
-            command.IsAcqusiting = Play.Checked;
+            command.IsAcquisiting = Play.Checked;
         }
 
         private void StartRecordPlay_Click(object sender, EventArgs e)
         {
-            if(!command.StartRecordAndAcqusite())
+            if (!command.StartRecordAndAcquisite())
             {
                 MessageBox.Show("unsuccessful starting record and acqusition.");
             }
@@ -82,7 +82,7 @@ namespace ImagerClient
 
         private void StopPlayRecord_Click(object sender, EventArgs e)
         {
-            if(!command.StopAcqusiteAndRecord())
+            if (!command.StopAcquisiteAndRecord())
             {
                 MessageBox.Show("unsuccessful stopping acqusition and record.");
             }

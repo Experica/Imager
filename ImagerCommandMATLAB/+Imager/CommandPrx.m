@@ -13,23 +13,23 @@
 %   getDataFormatAsync
 %   setDataFormat
 %   setDataFormatAsync
-%   getIsAcqusiting
-%   getIsAcqusitingAsync
-%   setIsAcqusiting
-%   setIsAcqusitingAsync
+%   getIsAcquisiting
+%   getIsAcquisitingAsync
+%   setIsAcquisiting
+%   setIsAcquisitingAsync
 %   getIsRecording
 %   getIsRecordingAsync
 %   setIsRecording
 %   setIsRecordingAsync
-%   getIsAcqusitingAndRecording
-%   getIsAcqusitingAndRecordingAsync
-%   setIsAcqusitingAndRecording
-%   setIsAcqusitingAndRecordingAsync
+%   StartRecordAndAcquisite
+%   StartRecordAndAcquisiteAsync
+%   StopAcquisiteAndRecord
+%   StopAcquisiteAndRecordAsync
 %   checkedCast - Contacts the remote server to verify that the object implements this type.
 %   uncheckedCast - Downcasts the given proxy to this type without contacting the remote server.
 
 % Copyright (c) ZeroC, Inc. All rights reserved.
-% Generated from ImagerCommand.ice by slice2matlab version 3.7.5
+% Generated from ImagerCommand.ice by slice2matlab version 3.7.6
 
 classdef CommandPrx < Ice.ObjectPrx
     methods
@@ -62,17 +62,22 @@ classdef CommandPrx < Ice.ObjectPrx
             end
             r_ = obj.iceInvokeAsync('getRecordPath', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setRecordPath(obj, path, varargin)
+        function result = setRecordPath(obj, path, varargin)
             % setRecordPath
             %
             % Parameters:
             %   path (char)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(path);
             obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setRecordPath', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('setRecordPath', 0, true, os_, true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
         function r_ = setRecordPathAsync(obj, path, varargin)
             % setRecordPathAsync
@@ -86,7 +91,13 @@ classdef CommandPrx < Ice.ObjectPrx
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(path);
             obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setRecordPath', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('setRecordPath', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
         function result = getRecordEpoch(obj, varargin)
             % getRecordEpoch
@@ -117,17 +128,22 @@ classdef CommandPrx < Ice.ObjectPrx
             end
             r_ = obj.iceInvokeAsync('getRecordEpoch', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setRecordEpoch(obj, epoch, varargin)
+        function result = setRecordEpoch(obj, epoch, varargin)
             % setRecordEpoch
             %
             % Parameters:
             %   epoch (char)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(epoch);
             obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setRecordEpoch', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('setRecordEpoch', 0, true, os_, true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
         function r_ = setRecordEpochAsync(obj, epoch, varargin)
             % setRecordEpochAsync
@@ -141,7 +157,13 @@ classdef CommandPrx < Ice.ObjectPrx
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(epoch);
             obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setRecordEpoch', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('setRecordEpoch', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
         function result = getDataFormat(obj, varargin)
             % getDataFormat
@@ -172,17 +194,22 @@ classdef CommandPrx < Ice.ObjectPrx
             end
             r_ = obj.iceInvokeAsync('getDataFormat', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setDataFormat(obj, format, varargin)
+        function result = setDataFormat(obj, format, varargin)
             % setDataFormat
             %
             % Parameters:
             %   format (char)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(format);
             obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setDataFormat', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('setDataFormat', 0, true, os_, true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
         function r_ = setDataFormatAsync(obj, format, varargin)
             % setDataFormatAsync
@@ -196,23 +223,29 @@ classdef CommandPrx < Ice.ObjectPrx
             os_ = obj.iceStartWriteParams([]);
             os_.writeString(format);
             obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setDataFormat', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('setDataFormat', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
-        function result = getIsAcqusiting(obj, varargin)
-            % getIsAcqusiting
+        function result = getIsAcquisiting(obj, varargin)
+            % getIsAcquisiting
             %
             % Parameters:
             %   context (containers.Map) - Optional request context.
             %
             % Returns (logical)
             
-            is_ = obj.iceInvoke('getIsAcqusiting', 0, true, [], true, {}, varargin{:});
+            is_ = obj.iceInvoke('getIsAcquisiting', 0, true, [], true, {}, varargin{:});
             is_.startEncapsulation();
             result = is_.readBool();
             is_.endEncapsulation();
         end
-        function r_ = getIsAcqusitingAsync(obj, varargin)
-            % getIsAcqusitingAsync
+        function r_ = getIsAcquisitingAsync(obj, varargin)
+            % getIsAcquisitingAsync
             %
             % Parameters:
             %   context (containers.Map) - Optional request context.
@@ -225,33 +258,44 @@ classdef CommandPrx < Ice.ObjectPrx
                 is_.endEncapsulation();
                 varargout{1} = result;
             end
-            r_ = obj.iceInvokeAsync('getIsAcqusiting', 0, true, [], 1, @unmarshal, {}, varargin{:});
+            r_ = obj.iceInvokeAsync('getIsAcquisiting', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setIsAcqusiting(obj, isacqusiting, varargin)
-            % setIsAcqusiting
+        function result = setIsAcquisiting(obj, isacquisiting, varargin)
+            % setIsAcquisiting
             %
             % Parameters:
-            %   isacqusiting (logical)
+            %   isacquisiting (logical)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
             os_ = obj.iceStartWriteParams([]);
-            os_.writeBool(isacqusiting);
+            os_.writeBool(isacquisiting);
             obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setIsAcqusiting', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('setIsAcquisiting', 0, true, os_, true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
-        function r_ = setIsAcqusitingAsync(obj, isacqusiting, varargin)
-            % setIsAcqusitingAsync
+        function r_ = setIsAcquisitingAsync(obj, isacquisiting, varargin)
+            % setIsAcquisitingAsync
             %
             % Parameters:
-            %   isacqusiting (logical)
+            %   isacquisiting (logical)
             %   context (containers.Map) - Optional request context.
             %
             % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
             
             os_ = obj.iceStartWriteParams([]);
-            os_.writeBool(isacqusiting);
+            os_.writeBool(isacquisiting);
             obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setIsAcqusiting', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('setIsAcquisiting', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
         function result = getIsRecording(obj, varargin)
             % getIsRecording
@@ -282,17 +326,22 @@ classdef CommandPrx < Ice.ObjectPrx
             end
             r_ = obj.iceInvokeAsync('getIsRecording', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setIsRecording(obj, isrecording, varargin)
+        function result = setIsRecording(obj, isrecording, varargin)
             % setIsRecording
             %
             % Parameters:
             %   isrecording (logical)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
             os_ = obj.iceStartWriteParams([]);
             os_.writeBool(isrecording);
             obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setIsRecording', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('setIsRecording', 0, true, os_, true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
         function r_ = setIsRecordingAsync(obj, isrecording, varargin)
             % setIsRecordingAsync
@@ -306,23 +355,29 @@ classdef CommandPrx < Ice.ObjectPrx
             os_ = obj.iceStartWriteParams([]);
             os_.writeBool(isrecording);
             obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setIsRecording', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('setIsRecording', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
-        function result = getIsAcqusitingAndRecording(obj, varargin)
-            % getIsAcqusitingAndRecording
+        function result = StartRecordAndAcquisite(obj, varargin)
+            % StartRecordAndAcquisite
             %
             % Parameters:
             %   context (containers.Map) - Optional request context.
             %
             % Returns (logical)
             
-            is_ = obj.iceInvoke('getIsAcqusitingAndRecording', 0, true, [], true, {}, varargin{:});
+            is_ = obj.iceInvoke('StartRecordAndAcquisite', 0, true, [], true, {}, varargin{:});
             is_.startEncapsulation();
             result = is_.readBool();
             is_.endEncapsulation();
         end
-        function r_ = getIsAcqusitingAndRecordingAsync(obj, varargin)
-            % getIsAcqusitingAndRecordingAsync
+        function r_ = StartRecordAndAcquisiteAsync(obj, varargin)
+            % StartRecordAndAcquisiteAsync
             %
             % Parameters:
             %   context (containers.Map) - Optional request context.
@@ -335,33 +390,36 @@ classdef CommandPrx < Ice.ObjectPrx
                 is_.endEncapsulation();
                 varargout{1} = result;
             end
-            r_ = obj.iceInvokeAsync('getIsAcqusitingAndRecording', 0, true, [], 1, @unmarshal, {}, varargin{:});
+            r_ = obj.iceInvokeAsync('StartRecordAndAcquisite', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
-        function setIsAcqusitingAndRecording(obj, isacqusitingandrecording, varargin)
-            % setIsAcqusitingAndRecording
+        function result = StopAcquisiteAndRecord(obj, varargin)
+            % StopAcquisiteAndRecord
             %
             % Parameters:
-            %   isacqusitingandrecording (logical)
             %   context (containers.Map) - Optional request context.
+            %
+            % Returns (logical)
             
-            os_ = obj.iceStartWriteParams([]);
-            os_.writeBool(isacqusitingandrecording);
-            obj.iceEndWriteParams(os_);
-            obj.iceInvoke('setIsAcqusitingAndRecording', 0, false, os_, false, {}, varargin{:});
+            is_ = obj.iceInvoke('StopAcquisiteAndRecord', 0, true, [], true, {}, varargin{:});
+            is_.startEncapsulation();
+            result = is_.readBool();
+            is_.endEncapsulation();
         end
-        function r_ = setIsAcqusitingAndRecordingAsync(obj, isacqusitingandrecording, varargin)
-            % setIsAcqusitingAndRecordingAsync
+        function r_ = StopAcquisiteAndRecordAsync(obj, varargin)
+            % StopAcquisiteAndRecordAsync
             %
             % Parameters:
-            %   isacqusitingandrecording (logical)
             %   context (containers.Map) - Optional request context.
             %
             % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
             
-            os_ = obj.iceStartWriteParams([]);
-            os_.writeBool(isacqusitingandrecording);
-            obj.iceEndWriteParams(os_);
-            r_ = obj.iceInvokeAsync('setIsAcqusitingAndRecording', 0, false, os_, 0, [], {}, varargin{:});
+            function varargout = unmarshal(is_)
+                is_.startEncapsulation();
+                result = is_.readBool();
+                is_.endEncapsulation();
+                varargout{1} = result;
+            end
+            r_ = obj.iceInvokeAsync('StopAcquisiteAndRecord', 0, true, [], 1, @unmarshal, {}, varargin{:});
         end
     end
     methods(Static)

@@ -11,13 +11,13 @@
         string getDataFormat();
         bool setDataFormat(string format);
 
-        bool getIsAcqusiting();
-        bool setIsAcqusiting(bool isacqusiting);
+        bool getIsAcquisiting();
+        bool setIsAcquisiting(bool isacquisiting);
 
         bool getIsRecording();
         bool setIsRecording(bool isrecording);
 
-        bool StartRecordAndAcqusite();
-        bool StopAcqusiteAndRecord();
+        bool StartRecordAndAcquisite();
+        bool StopAcquisiteAndRecord();
     }
 }

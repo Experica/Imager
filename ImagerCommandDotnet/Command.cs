@@ -76,10 +76,10 @@ namespace ImagerCommand
             set { command.setDataFormat(value); }
         }
 
-        public bool IsAcqusiting
+        public bool IsAcquisiting
         {
-            get { return command.getIsAcqusiting(); }
-            set { command.setIsAcqusiting(value); }
+            get { return command.getIsAcquisiting(); }
+            set { command.setIsAcquisiting(value); }
         }
 
         public bool IsRecording
@@ -88,14 +88,14 @@ namespace ImagerCommand
             set { command.setIsRecording(value); }
         }
 
-        public bool StartRecordAndAcqusite()
+        public bool StartRecordAndAcquisite()
         {
-            return command.StartRecordAndAcqusite();
+            return command.StartRecordAndAcquisite();
         }
 
-        public bool StopAcqusiteAndRecord()
+        public bool StopAcquisiteAndRecord()
         {
-            return command.StopAcqusiteAndRecord();
+            return command.StopAcquisiteAndRecord();
         }
     }
 }

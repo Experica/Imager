@@ -35,15 +35,15 @@ classdef ImagerCommand < handle
             end
         end
         
-        function SetRecordPath(obj,filepath)
+        function [r] = setRecordPath(obj,filepath)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setRecordPath(filepath);
+                r = obj.command.setRecordPath(filepath);
             end
         end
         
-        function [filepath] = GetRecordPath(obj)
+        function [filepath] = getRecordPath(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
@@ -51,15 +51,15 @@ classdef ImagerCommand < handle
             end
         end
         
-        function SetRecordEpoch(obj,epoch)
+        function [r] = setRecordEpoch(obj,epoch)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setRecordEpoch(epoch);
+                r = obj.command.setRecordEpoch(epoch);
             end
         end
         
-        function [epoch] = GetRecordEpoch(obj)
+        function [epoch] = getRecordEpoch(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
@@ -67,15 +67,15 @@ classdef ImagerCommand < handle
             end
         end
         
-        function SetDataFormat(obj,format)
+        function [r] = setDataFormat(obj,format)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setDataFormat(format);
+                r = obj.command.setDataFormat(format);
             end
         end
         
-        function [format] = GetDataFormat(obj)
+        function [format] = getDataFormat(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
@@ -83,31 +83,31 @@ classdef ImagerCommand < handle
             end
         end
         
-        function SetIsAcqusiting(obj,isacqusiting)
+        function [r] = setIsAcquisiting(obj,isacquisiting)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setIsAcqusiting(isacqusiting);
+                r = obj.command.setIsAcquisiting(isacquisiting);
             end
         end
         
-        function [isacqusiting] = GetIsAcqusiting(obj)
+        function [isacquisiting] = getIsAcqusiting(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                isacqusiting = obj.command.getIsAcqusiting();
+                isacquisiting = obj.command.getIsAcquisiting();
             end
         end
         
-        function SetIsRecording(obj,isrecording)
+        function [r] = setIsRecording(obj,isrecording)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setIsRecording(isrecording);
+                r = obj.command.setIsRecording(isrecording);
             end
         end
         
-        function [isrecording] = GetIsRecording(obj)
+        function [isrecording] = getIsRecording(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
@@ -115,19 +115,19 @@ classdef ImagerCommand < handle
             end
         end
         
-        function SetIsAcqusitingAndRecording(obj,isacqusitingandrecording)
+        function [r] = StartRecordAndAcquisite(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                obj.command.setIsAcqusitingAndRecording(isacqusitingandrecording);
+                r = obj.command.StartRecordAndAcquisite();
             end
         end
         
-        function [isacqusitingandrecording] = GetIsAcqusitingAndRecording(obj)
+        function [r] = StopAcquisiteAndRecord(obj)
             if isempty(obj.command)
                 warning('No Command Proxy, Connect First.');
             else
-                isacqusitingandrecording = obj.command.getIsAcqusitingAndRecording();
+                r = obj.command.StopAcquisiteAndRecord();
             end
         end
         

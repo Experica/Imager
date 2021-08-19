@@ -1,14 +1,14 @@
 cmd = ImagerCommand();
 cmd.Connect('localhost',10000);
 
-cmd.SetRecordPath('C:\Users\fff00\Pictures\Test');
-cmd.SetDataFormat('Raw');
-cmd.SetRecordEpoch('3');
+cmd.setRecordPath('C:\Users\fff00\Pictures\Test');
+cmd.setDataFormat('Raw');
+cmd.setRecordEpoch('3');
 
-cmd.SetIsAcqusiting(true);
-cmd.SetIsRecording(true);
+cmd.setIsRecording(true);
+cmd.setIsAcqusiting(true);
 
-cmd.SetIsRecording(false);
-cmd.SetIsAcqusiting(false);
+cmd.setIsAcqusiting(false);
+cmd.setIsRecording(false);
 
 cmd.Disconnect();
