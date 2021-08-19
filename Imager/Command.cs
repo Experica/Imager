@@ -114,7 +114,7 @@ namespace Imager
             {
                 var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacquisiting);
                 ar.AsyncWaitHandle.WaitOne(timeout);
-                if (ar.IsCompleted) { return true; } else { return false; }
+                return ar.IsCompleted;
             }
             catch { return false; }
         }
@@ -122,7 +122,7 @@ namespace Imager
         {
             try
             {
-                return mainform.recorder.RecordStatus == RecordStatus.Recording;
+                return mainform.recorder.IsRecording;
             }
             catch { return false; }
         }
@@ -133,7 +133,7 @@ namespace Imager
             {
                 var ar = mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording);
                 ar.AsyncWaitHandle.WaitOne(timeout);
-                if (ar.IsCompleted) { return true; } else { return false; }
+                return ar.IsCompleted;
             }
             catch { return false; }
         }

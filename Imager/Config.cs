@@ -31,7 +31,7 @@ namespace Imager
     {
         public string DataDir { get; set; } = "";
         public string RecordName { get; set; } = "";
-        public DataFormat DataFormat { get; set; } = DataFormat.TIFF;
+        public DataFormat DataFormat { get; set; } = DataFormat.Raw;
         public uint AvgBitrate { get; set; } = 100000000;
         public uint MinAvgBitrate { get; set; } = 1000000;
         public uint MaxAvgBitrate { get; set; } = 1000000000;
@@ -41,7 +41,7 @@ namespace Imager
         public bool DisplayVSync { get; set; } = false;
         public uint DisplayTargetFPS { get; set; } = 60;
         public bool StopDisplayWhenRecord { get; set; } = false;
-        public bool ResetStatisticsWhenRecord { get; set; } = true;
+        public bool ResetStatisticsWhenRecord { get; set; } = false;
         /// <summary>
         /// Increasing the buffer count can make streaming more tolerant to missing block IDs, 
         /// but at the expense of using more memory and increasing latency.
@@ -118,7 +118,7 @@ namespace Imager
         /// <summary>
         /// Exposure time in microseconds
         /// </summary>
-        public double ExposureTime { get; set; } = 10000;
+        public double ExposureTime { get; set; } = 40000;
 
         public void Read(PvGenParameterArray ps)
         {

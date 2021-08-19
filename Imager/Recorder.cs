@@ -64,8 +64,8 @@ namespace Imager
         public string RecordPath = null;
         public string RecordEpoch = "0";
 
-        public uint BytesWritten = 0;
-        public uint ImageWritten = 0;
+        uint BytesWritten = 0;
+        uint ImageWritten = 0;
 
         public uint AvgBitrate
         {
