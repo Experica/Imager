@@ -2,9 +2,9 @@
 <dependencies>
   <source name="..\ImagerCommand.ice">
     <options>
-      <IceHome>C:\Users\fff00\Imager\packages\zeroc.ice.net.3.7.6\build\..</IceHome>
-      <IceToolsPath>C:\Users\fff00\Imager\packages\zeroc.ice.net.3.7.6\build\..\tools</IceToolsPath>
-      <OutputDir>C:\Users\fff00\Imager\ImagerCommandDotnet\generated</OutputDir>
+      <IceHome>C:\Users\SNLC_2P\Imager\packages\zeroc.ice.net.3.7.9\build\..</IceHome>
+      <IceToolsPath>C:\Users\SNLC_2P\Imager\packages\zeroc.ice.net.3.7.9\build\..\tools</IceToolsPath>
+      <OutputDir>C:\Users\SNLC_2P\Imager\ImagerCommandDotnet\generated</OutputDir>
     </options>
   </source>
 </dependencies>

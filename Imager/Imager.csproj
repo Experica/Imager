@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
-  <Import Project="..\packages\zeroc.ice.net.3.7.6\build\zeroc.ice.net.props" Condition="Exists('..\packages\zeroc.ice.net.3.7.6\build\zeroc.ice.net.props')" />
-  <Import Project="..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.props" Condition="Exists('..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.props')" />
+  <Import Project="..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.props" Condition="Exists('..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.props')" />
+  <Import Project="..\packages\zeroc.ice.net.3.7.9\build\zeroc.ice.net.props" Condition="Exists('..\packages\zeroc.ice.net.3.7.9\build\zeroc.ice.net.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -18,6 +18,10 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ProjectTypeGuids>{28993779-3132-408A-BCB0-1D78225F4824};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,12 +34,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <ProjectTypeGuids>{28993779-3132-408A-BCB0-1D78225F4824};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,7 +56,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -67,32 +67,32 @@
     <ApplicationIcon>Imager.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Glacier2, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\Glacier2.dll</HintPath>
+    <Reference Include="Glacier2, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\Glacier2.dll</HintPath>
     </Reference>
-    <Reference Include="Ice, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\Ice.dll</HintPath>
+    <Reference Include="Ice, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\Ice.dll</HintPath>
     </Reference>
-    <Reference Include="IceBox, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceBox.dll</HintPath>
+    <Reference Include="IceBox, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceBox.dll</HintPath>
     </Reference>
-    <Reference Include="IceDiscovery, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceDiscovery.dll</HintPath>
+    <Reference Include="IceDiscovery, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceDiscovery.dll</HintPath>
     </Reference>
-    <Reference Include="IceGrid, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceGrid.dll</HintPath>
+    <Reference Include="IceGrid, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceGrid.dll</HintPath>
     </Reference>
-    <Reference Include="IceLocatorDiscovery, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceLocatorDiscovery.dll</HintPath>
+    <Reference Include="IceLocatorDiscovery, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceLocatorDiscovery.dll</HintPath>
     </Reference>
-    <Reference Include="IcePatch2, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IcePatch2.dll</HintPath>
+    <Reference Include="IcePatch2, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IcePatch2.dll</HintPath>
     </Reference>
-    <Reference Include="IceSSL, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceSSL.dll</HintPath>
+    <Reference Include="IceSSL, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceSSL.dll</HintPath>
     </Reference>
-    <Reference Include="IceStorm, Version=3.7.6.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\zeroc.ice.net.3.7.6\lib\net45\IceStorm.dll</HintPath>
+    <Reference Include="IceStorm, Version=3.7.9.0, Culture=neutral, PublicKeyToken=0c5ebb72d74932c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\zeroc.ice.net.3.7.9\lib\net45\IceStorm.dll</HintPath>
     </Reference>
     <Reference Include="PvGUIDotNet" />
     <Reference Include="PvDotNet" />
@@ -102,8 +102,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>
+    <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.13.1.1\lib\net47\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -195,11 +195,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.props'))" />
-    <Error Condition="!Exists('..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.targets'))" />
-    <Error Condition="!Exists('..\packages\zeroc.ice.net.3.7.6\build\zeroc.ice.net.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.ice.net.3.7.6\build\zeroc.ice.net.props'))" />
+    <Error Condition="!Exists('..\packages\zeroc.ice.net.3.7.9\build\zeroc.ice.net.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.ice.net.3.7.9\build\zeroc.ice.net.props'))" />
+    <Error Condition="!Exists('..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.props'))" />
+    <Error Condition="!Exists('..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.targets'))" />
   </Target>
-  <Import Project="..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.targets" Condition="Exists('..\packages\zeroc.icebuilder.msbuild.5.0.7\build\zeroc.icebuilder.msbuild.targets')" />
+  <Import Project="..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.targets" Condition="Exists('..\packages\zeroc.icebuilder.msbuild.5.0.9\build\zeroc.icebuilder.msbuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

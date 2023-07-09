@@ -18,8 +18,9 @@ classdef ImagerCommand < handle
             if ~libisloaded('ice')
                 loadlibrary('ice', @iceproto)
             end
-            obj.Disconnect();
-            obj.communicator = Ice.initialize();
+            if isempty(obj.communicator)
+                obj.communicator = Ice.initialize();
+            end
             base = obj.communicator.stringToProxy(append('Command:default -h ',host,' -p ',num2str(port)));
             obj.command = Imager.CommandPrx.checkedCast(base);
             if isempty(obj.command)
@@ -48,22 +49,6 @@ classdef ImagerCommand < handle
                 warning('No Command Proxy, Connect First.');
             else
                 filepath = obj.command.getRecordPath();
-            end
-        end
-        
-        function [r] = setRecordEpoch(obj,epoch)
-            if isempty(obj.command)
-                warning('No Command Proxy, Connect First.');
-            else
-                r = obj.command.setRecordEpoch(epoch);
-            end
-        end
-        
-        function [epoch] = getRecordEpoch(obj)
-            if isempty(obj.command)
-                warning('No Command Proxy, Connect First.');
-            else
-                epoch = obj.command.getRecordEpoch();
             end
         end
         

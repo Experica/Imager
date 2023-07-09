@@ -20,10 +20,6 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ice;
 using Imager;
 
@@ -36,15 +32,13 @@ namespace ImagerCommand
 
         public void Connect(string host = "LocalHost", uint port = 10000)
         {
-            if (communicator == null)
+            if (communicator == null) { communicator = Util.initialize(); }
+
+            var obj = communicator.stringToProxy($"Command:default -h {host} -p {port}");
+            command = CommandPrxHelper.checkedCast(obj);
+            if (command == null)
             {
-                communicator = Util.initialize();
-                var obj = communicator.stringToProxy($"Command:default -h {host} -p {port}");
-                command = CommandPrxHelper.checkedCast(obj);
-                if (command == null)
-                {
-                    throw new ApplicationException($"Invalid Command Proxy from Host: {host}, Port: {port}");
-                }
+                throw new ApplicationException($"Invalid Command Proxy from Host: {host}, Port: {port}");
             }
         }
 
@@ -60,42 +54,36 @@ namespace ImagerCommand
 
         public string RecordPath
         {
-            get { return command.getRecordPath(); }
-            set { command.setRecordPath(value); }
-        }
-
-        public string RecordEpoch
-        {
-            get { return command.getRecordEpoch(); }
-            set { command.setRecordEpoch(value); }
+            get { return command?.getRecordPath(); }
+            set { command?.setRecordPath(value); }
         }
 
         public string DataFormat
         {
-            get { return command.getDataFormat(); }
-            set { command.setDataFormat(value); }
+            get { return command?.getDataFormat(); }
+            set { command?.setDataFormat(value); }
         }
 
         public bool IsAcquisiting
         {
-            get { return command.getIsAcquisiting(); }
-            set { command.setIsAcquisiting(value); }
+            get { return command?.getIsAcquisiting() ?? false; }
+            set { command?.setIsAcquisiting(value); }
         }
 
         public bool IsRecording
         {
-            get { return command.getIsRecording(); }
-            set { command.setIsRecording(value); }
+            get { return command?.getIsRecording() ?? false; }
+            set { command?.setIsRecording(value); }
         }
 
         public bool StartRecordAndAcquisite()
         {
-            return command.StartRecordAndAcquisite();
+            return command?.StartRecordAndAcquisite() ?? false;
         }
 
         public bool StopAcquisiteAndRecord()
         {
-            return command.StopAcquisiteAndRecord();
+            return command?.StopAcquisiteAndRecord() ?? false;
         }
     }
 }

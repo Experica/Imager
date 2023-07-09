@@ -20,10 +20,6 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Ice;
 
 namespace Imager
@@ -47,31 +43,11 @@ namespace Imager
             }
             catch { return null; }
         }
-
         public override bool setRecordPath(string path, Current current = null)
         {
             try
             {
                 mainform.recorder.RecordPath = path;
-                return true;
-            }
-            catch { return false; }
-        }
-
-        public override string getRecordEpoch(Current current = null)
-        {
-            try
-            {
-                return mainform.recorder.RecordEpoch;
-            }
-            catch { return null; }
-        }
-
-        public override bool setRecordEpoch(string epoch, Current current = null)
-        {
-            try
-            {
-                mainform.recorder.RecordEpoch = epoch;
                 return true;
             }
             catch { return false; }
@@ -85,18 +61,21 @@ namespace Imager
             }
             catch { return null; }
         }
-
         public override bool setDataFormat(string format, Current current = null)
         {
-            if (Enum.TryParse(format, out DataFormat fmt))
+            try
             {
-                mainform.recorder.DataFormat = fmt;
-                return true;
+                if (Enum.TryParse(format, out DataFormat fmt))
+                {
+                    mainform.recorder.DataFormat = fmt;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            catch { return false; }
         }
 
         public override bool getIsAcquisiting(Current current = null)
@@ -107,7 +86,6 @@ namespace Imager
             }
             catch { return false; }
         }
-
         public override bool setIsAcquisiting(bool isacquisiting, Current current = null)
         {
             try
@@ -118,6 +96,7 @@ namespace Imager
             }
             catch { return false; }
         }
+
         public override bool getIsRecording(Current current = null)
         {
             try
@@ -126,7 +105,6 @@ namespace Imager
             }
             catch { return false; }
         }
-
         public override bool setIsRecording(bool isrecording, Current current = null)
         {
             try
@@ -142,7 +120,6 @@ namespace Imager
         {
             return setIsRecording(true) && setIsAcquisiting(true);
         }
-
         public override bool StopAcquisiteAndRecord(Current current = null)
         {
             return setIsAcquisiting(false) && setIsRecording(false);

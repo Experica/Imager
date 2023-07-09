@@ -5,9 +5,6 @@
         string getRecordPath();
         bool setRecordPath(string path);
 
-        string getRecordEpoch();
-        bool setRecordEpoch(string epoch);
-
         string getDataFormat();
         bool setDataFormat(string format);
 

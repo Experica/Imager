@@ -20,9 +20,6 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using PvDotNet;
 
 namespace Imager
@@ -41,7 +38,7 @@ namespace Imager
         public bool DisplayVSync { get; set; } = false;
         public uint DisplayTargetFPS { get; set; } = 60;
         public bool StopDisplayWhenRecord { get; set; } = false;
-        public bool ResetStatisticsWhenRecord { get; set; } = false;
+        public bool ResetStatisticsWhenRecord { get; set; } = true;
         /// <summary>
         /// Increasing the buffer count can make streaming more tolerant to missing block IDs, 
         /// but at the expense of using more memory and increasing latency.
@@ -59,7 +56,7 @@ namespace Imager
         public AcquisitionControl AcquisitionControl { get; set; } = new AcquisitionControl();
         public Strobe Strobe { get; set; } = new Strobe();
         /// <summary>
-        /// Array of 256 colors with R,G,B 8 bits per channel pixel
+        /// List of 256 colors with 8 bits per R/G/B channel
         /// </summary>
         public byte[][] ColorMap { get; set; } = null;
     }
@@ -75,30 +72,15 @@ namespace Imager
         public void Read(PvGenParameterArray ps)
         {
             var t = ps.GetInteger("Width");
-            if (t != null)
-            {
-                Width = (uint)t.Value;
-            }
+            if (t != null) { Width = (uint)t.Value; }
             t = ps.GetInteger("Height");
-            if (t != null)
-            {
-                Height = (uint)t.Value;
-            }
+            if (t != null) { Height = (uint)t.Value; }
             t = ps.GetInteger("OffsetX");
-            if (t != null)
-            {
-                OffsetX = (uint)t.Value;
-            }
+            if (t != null) { OffsetX = (uint)t.Value; }
             t = ps.GetInteger("OffsetY");
-            if (t != null)
-            {
-                OffsetY = (uint)t.Value;
-            }
+            if (t != null) { OffsetY = (uint)t.Value; }
             var p = ps.GetEnum("PixelFormat");
-            if (p != null)
-            {
-                PixelFormat = (PvPixelType)Enum.Parse(typeof(PvPixelType), p.ValueString);
-            }
+            if (p != null) { PixelFormat = (PvPixelType)Enum.Parse(typeof(PvPixelType), p.ValueString); }
         }
 
         public void Write(PvGenParameterArray ps)
@@ -123,20 +105,11 @@ namespace Imager
         public void Read(PvGenParameterArray ps)
         {
             var b = ps.GetBoolean("AcquisitionFrameRateEnable");
-            if (b != null)
-            {
-                AcquisitionFrameRateEnable = b.Value;
-            }
+            if (b != null) { AcquisitionFrameRateEnable = b.Value; }
             var f = ps.GetFloat("AcquisitionFrameRate");
-            if (f != null)
-            {
-                AcquisitionFrameRate = f.Value;
-            }
+            if (f != null) { AcquisitionFrameRate = f.Value; }
             f = ps.GetFloat("ExposureTime");
-            if (f != null)
-            {
-                ExposureTime = f.Value;
-            }
+            if (f != null) { ExposureTime = f.Value; }
         }
 
         public void Write(PvGenParameterArray ps)
@@ -162,20 +135,11 @@ namespace Imager
         public void Read(PvGenParameterArray ps)
         {
             var b = ps.GetBoolean("Strobe_Invert");
-            if (b != null)
-            {
-                Strobe_Invert = b.Value;
-            }
+            if (b != null) { Strobe_Invert = b.Value; }
             var f = ps.GetFloat("Strobe_Delay");
-            if (f != null)
-            {
-                Strobe_Delay = f.Value;
-            }
+            if (f != null) { Strobe_Delay = f.Value; }
             f = ps.GetFloat("Strobe_PulseWidth");
-            if (f != null)
-            {
-                Strobe_PulseWidth = f.Value;
-            }
+            if (f != null) { Strobe_PulseWidth = f.Value; }
         }
 
         public void Write(PvGenParameterArray ps)

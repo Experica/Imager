@@ -1,5 +1,5 @@
 ﻿/*
-Form1.cs is part of the Imager.
+ClientForm.cs is part of the Imager.
 Copyright (c) 2021 Li Alex Zhang and Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a 
@@ -32,30 +32,38 @@ using ImagerCommand;
 
 namespace ImagerClient
 {
-    public partial class Form1 : Form
+    public partial class ClientForm : Form
     {
         Command command = new Command();
 
-        public Form1()
+        public ClientForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            command.Disconnect();
+        }
+
+        private void connect_Click(object sender, EventArgs e)
         {
             try
             {
                 command.Connect(IP.Text, (uint)Port.Value);
+                connect.Checked = true;
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                connect.Checked = false;
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Play_CheckedChanged(object sender, EventArgs e)
         {
-            command.Disconnect();
+            command.IsAcquisiting = Play.Checked;
+            Play.Text = Play.Checked ? "Stop" : "Play";
         }
 
         private void Record_CheckedChanged(object sender, EventArgs e)
@@ -65,11 +73,7 @@ namespace ImagerClient
                 command.RecordPath = RecordPath.Text;
             }
             command.IsRecording = Record.Checked;
-        }
-
-        private void Play_CheckedChanged(object sender, EventArgs e)
-        {
-            command.IsAcquisiting = Play.Checked;
+            Record.Text = Record.Checked ? "Stop Record" : "Start Record";
         }
 
         private void StartRecordPlay_Click(object sender, EventArgs e)
@@ -87,5 +91,6 @@ namespace ImagerClient
                 MessageBox.Show("unsuccessful stopping acqusition and record.");
             }
         }
+
     }
 }

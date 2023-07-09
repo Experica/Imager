@@ -49,51 +49,62 @@ namespace Imager
         readonly object call = new object();
         PvBufferWriter bufferWriter = new PvBufferWriter();
         PvMp4Writer mp4Writer = new PvMp4Writer();
+        uint bytesWritten = 0;
+        uint imageWritten = 0;
+        RecordStatus recordStatus = RecordStatus.None;
 
-        RecordStatus _recordstatus = RecordStatus.None;
-        public RecordStatus RecordStatus
-        {
-            get { lock (call) { return _recordstatus; } }
-            set { lock (call) { _recordstatus = value; } }
-        }
-        public bool IsRecording
-        {
-            get { lock (call) { return _recordstatus == RecordStatus.Recording; } }
-        }
         public DataFormat DataFormat = DataFormat.TIFF;
         public string RecordPath = null;
-        public string RecordEpoch = "0";
-
-        uint BytesWritten = 0;
-        uint ImageWritten = 0;
-
         public uint AvgBitrate
         {
             get { return mp4Writer.AvgBitrate; }
             set { mp4Writer.AvgBitrate = value; }
         }
-
-        public void ResetPath()
+        public void Reset()
         {
-            RecordPath = null;
-            RecordEpoch = "0";
+            lock (call) { RecordPath = null; imageWritten = 0; }
+        }
+        public bool IsRecording { get { lock (call) { return recordStatus == RecordStatus.Recording; } } }
+        public void StartStop(bool isstart)
+        {
+            lock (call) { recordStatus = isstart ? RecordStatus.Recording : RecordStatus.Stopped; }
         }
 
-        public void ResetCounter()
-        {
-            ImageWritten = 0;
-            BytesWritten = 0;
-        }
 
         public bool RecordImage(PvBuffer pvBuffer)
         {
             lock (call)
             {
-                if (_recordstatus == RecordStatus.Recording)
+                if (recordStatus == RecordStatus.Recording)
                 {
                     return SaveImage(pvBuffer);
                 }
                 return false;
+            }
+        }
+
+        public bool SaveCurrentImage(PvDisplayThread displayThread)
+        {
+            lock (call)
+            {
+                bool hr = false;
+                if (DataFormat != DataFormat.MP4)
+                {
+                    hr = SaveImage(displayThread.RetrieveLatestBuffer());
+                    displayThread.ReleaseLatestBuffer();
+                }
+                return hr;
+            }
+        }
+
+        public void StopMP4()
+        {
+            lock (call)
+            {
+                if (mp4Writer.IsOpened())
+                {
+                    mp4Writer.Close();
+                }
             }
         }
 
@@ -106,12 +117,12 @@ namespace Imager
                     SaveMP4(pvBuffer);
                     break;
                 case DataFormat.TIFF:
-                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Epoch{RecordEpoch}-Frame{ImageWritten}.{DataFormat}", PvBufferFormatType.TIFF, ref BytesWritten);
-                    ImageWritten++;
+                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Frame{imageWritten}.{DataFormat}", PvBufferFormatType.TIFF, ref bytesWritten);
+                    imageWritten++;
                     break;
                 case DataFormat.Raw:
-                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Epoch{RecordEpoch}-Frame{ImageWritten}.{DataFormat}", PvBufferFormatType.Raw, ref BytesWritten);
-                    ImageWritten++;
+                    bufferWriter.Store(pvBuffer, $"{RecordPath}-Frame{imageWritten}.{DataFormat}", PvBufferFormatType.Raw, ref bytesWritten);
+                    imageWritten++;
                     break;
                 default:
                     return false;
@@ -119,40 +130,13 @@ namespace Imager
             return true;
         }
 
-        public bool SaveCurrentImage(PvDisplayThread displayThread)
-        {
-            lock (call)
-            {
-                bool hr = false;
-                if (!IsFormatVedio)
-                {
-                    hr = SaveImage(displayThread.RetrieveLatestBuffer());
-                    displayThread.ReleaseLatestBuffer();
-                }
-                return hr;
-            }
-        }
-
-        public bool IsFormatVedio { get { return DataFormat == DataFormat.MP4; } }
-
         void SaveMP4(PvBuffer pvBuffer)
         {
             if (!mp4Writer.IsOpened())
             {
-                mp4Writer.Open($"{RecordPath}-Epoch{RecordEpoch}.{DataFormat}", pvBuffer.Image);
+                mp4Writer.Open($"{RecordPath}.{DataFormat}", pvBuffer.Image);
             }
-            mp4Writer.WriteFrame(pvBuffer.Image, ref BytesWritten);
-        }
-
-        public void StopMP4()
-        {
-            lock (call)
-            {
-                if (mp4Writer.IsOpened())
-                {
-                    mp4Writer.Close();
-                }
-            }
+            mp4Writer.WriteFrame(pvBuffer.Image, ref bytesWritten);
         }
 
     }

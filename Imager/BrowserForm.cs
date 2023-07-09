@@ -36,7 +36,7 @@ namespace Imager
             InitializeComponent();
         }
 
-        private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
+        void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!Modal && (e.CloseReason == CloseReason.UserClosing))
             {

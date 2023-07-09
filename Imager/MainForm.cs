@@ -40,33 +40,25 @@ namespace Imager
     {
         // Handler used to bring link disconnected event in the main UI thread
         Action mDisconnectedHandler = null;
-
         // Handler used to bring acquisition mode changed event in the main UI thread
         Action mAcquisitionModeChangedHandler = null;
-
         // Handler used to bring acquisition state manager callbacks in the main UI thread
         Action mAcquisitionStateChangedHandler = null;
-
         public Action<bool> mRecordCheckedHandler = null;
         public Action<bool> mPlayCheckedHandler = null;
 
-        // Main application objects: device, stream, pipeline
-        private PvDevice mDevice = null;
-        private PvStream mStream = null;
-        private PvPipeline mPipeline = null;
-
-        // Acquisition state manager
-        private PvAcquisitionStateManager mAcquisitionManager = null;
-
-        // Display thread
-        private PvDisplayThread mDisplayThread = null;
+        PvDevice mDevice = null;
+        PvStream mStream = null;
+        PvPipeline mPipeline = null;
+        PvAcquisitionStateManager mAcquisitionManager = null;
+        PvDisplayThread mDisplayThread = new PvDisplayThread();
 
         // Parameter browsers
-        private BrowserForm mCommBrowser = new BrowserForm();
-        private BrowserForm mDeviceBrowser = new BrowserForm();
-        private BrowserForm mStreamBrowser = new BrowserForm();
+        BrowserForm mCommBrowser = new BrowserForm();
+        BrowserForm mDeviceBrowser = new BrowserForm();
+        BrowserForm mStreamBrowser = new BrowserForm();
 
-        public Recorder recorder = new Recorder();
+        public readonly Recorder recorder = new Recorder();
         const string configpath = "Config.yaml";
         Config config;
         Communicator communicator;
@@ -91,20 +83,24 @@ namespace Imager
             mDeviceBrowser.Owner = this;
             mStreamBrowser.Owner = this;
 
-            // Create display thread, hook event
-            mDisplayThread = new PvDisplayThread();
+            // Hook display thread event
             mDisplayThread.OnBufferDisplay += DisplayThread_OnBufferDisplay;
             mDisplayThread.OnBufferDone += DisplayThread_OnBufferDone;
 
+            // Init UI
             DataFormat.DataSource = Enum.GetNames(typeof(DataFormat));
             DataFormat.SelectedIndex = 0;
-
             var displaymenu = display.ContextMenuStrip;
             displaymenu.Items.Add(new ToolStripSeparator());
             displaymenu.Items.Add("Create ROI").Click += CreateROI_Click;
             displaymenu.Items.Add("Upload ROI").Click += UploadROI_Click;
             displaymenu.Items.Add(new ToolStripSeparator());
             displaymenu.Items.Add("Clear ROI").Click += ClearROI_Click;
+        }
+
+        public bool IsAcquisiting
+        {
+            get { return mAcquisitionManager?.State == PvAcquisitionState.Locked; }
         }
 
         void UploadROI_Click(object sender, EventArgs e)
@@ -175,9 +171,10 @@ namespace Imager
 
         void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Disconnect();
             UpdateToConfig();
-            SaveConfig();
+            DeviceUpdateToConfig();
+            configpath.WriteYamlFile(config);
+            Disconnect();
         }
 
         void LoadConfig()
@@ -222,37 +219,49 @@ namespace Imager
 
         void DeviceUpdateFromConfig()
         {
-            config.ImageFormat.Write(mDevice.Parameters);
-            config.AcquisitionControl.Write(mDevice.Parameters);
-            config.Strobe.Write(mDevice.Parameters);
+            if (mDevice != null)
+            {
+                config.ImageFormat.Write(mDevice.Parameters);
+                config.AcquisitionControl.Write(mDevice.Parameters);
+                config.Strobe.Write(mDevice.Parameters);
+            }
         }
 
         void DeviceUpdateToConfig()
         {
-            config.ImageFormat.Read(mDevice.Parameters);
-            config.AcquisitionControl.Read(mDevice.Parameters);
-            config.Strobe.Read(mDevice.Parameters);
+            if (mDevice != null)
+            {
+                config.ImageFormat.Read(mDevice.Parameters);
+                config.AcquisitionControl.Read(mDevice.Parameters);
+                config.Strobe.Read(mDevice.Parameters);
+            }
         }
 
-        void SaveConfig(string filepath = configpath, bool ismeta = false)
+        /// <summary>
+        /// Save part of config as *.meta file that is specific to one recording session, 
+        /// skip saving if file with the same name already exists.
+        /// </summary>
+        /// <param name="recordpath"></param>
+        void SaveMeta(string recordpath)
         {
-            if (ismeta)
-            {
-                var cm = config.ColorMap;
-                var datadir = config.DataDir;
-                var recordname = config.RecordName;
-                config.ColorMap = null;
-                config.DataDir = Path.GetDirectoryName(recorder.RecordPath);
-                config.RecordName = Path.GetFileNameWithoutExtension(recorder.RecordPath);
+            var metapath = $"{recordpath}.meta";
+            if (File.Exists(metapath)) { return; }
 
-                filepath.WriteYamlFile(config);
+            UpdateToConfig();
+            DeviceUpdateToConfig();
 
-                config.ColorMap = cm;
-                config.DataDir = datadir;
-                config.RecordName = recordname;
-            }
-            else
-            { filepath.WriteYamlFile(config); }
+            var cm = config.ColorMap;
+            var datadir = config.DataDir;
+            var recordname = config.RecordName;
+            config.ColorMap = null;
+            config.DataDir = Path.GetDirectoryName(recordpath);
+            config.RecordName = Path.GetFileNameWithoutExtension(recordpath);
+
+            metapath.WriteYamlFile(config);
+
+            config.ColorMap = cm;
+            config.DataDir = datadir;
+            config.RecordName = recordname;
         }
 
         void EnableUI()
@@ -269,11 +278,6 @@ namespace Imager
             communicationButton.Enabled = mDevice != null;
             deviceButton.Enabled = mDevice != null;
             streamButton.Enabled = mDevice != null;
-        }
-
-        public bool IsAcquisiting
-        {
-            get { return mAcquisitionManager?.State == PvAcquisitionState.Locked; }
         }
 
         void EnableAcquisitionUI()
@@ -567,19 +571,6 @@ namespace Imager
             recorder.RecordImage(aBuffer);
         }
 
-        void OnRecordStopped()
-        {
-            UpdateToConfig();
-            DeviceUpdateToConfig();
-            var metapath = $"{recorder.RecordPath}.meta";
-            if (!File.Exists(metapath))
-            {
-                SaveConfig(metapath, true);
-            }
-            recorder.ResetPath();
-            Record.Text = "Start Record";
-        }
-
         /// <summary>
         /// GenICam parameter invalidation event, registered for all parameters.
         /// </summary>
@@ -597,7 +588,7 @@ namespace Imager
         /// <summary>
         /// Acquisition mode event handler in main thread.
         /// </summary>
-        private void OnAcquisitionModeChanged()
+        void OnAcquisitionModeChanged()
         {
             // Get parameter
             PvGenEnum lParameter = mDevice.Parameters.GetEnum("AcquisitionMode");
@@ -640,7 +631,7 @@ namespace Imager
         /// <param name="aForm"></param>
         /// <param name="aParams"></param>
         /// <param name="aTitle"></param>
-        private void ShowGenWindow(BrowserForm aForm, PvGenParameterArray aParams, string aTitle)
+        void ShowGenWindow(BrowserForm aForm, PvGenParameterArray aParams, string aTitle)
         {
             if (aForm.Visible)
             {
@@ -658,7 +649,7 @@ namespace Imager
         /// Closes a GenICam browser form.
         /// </summary>
         /// <param name="aForm"></param>
-        private void CloseGenWindow(Form aForm)
+        void CloseGenWindow(Form aForm)
         {
             aForm.Hide();
         }
@@ -667,7 +658,7 @@ namespace Imager
         /// Direct device disconnect handler. Just jump back to main UI thread.
         /// </summary>
         /// <param name="aDevice"></param>
-        private void OnLinkDisconnected(PvDevice aDevice)
+        void OnLinkDisconnected(PvDevice aDevice)
         {
             BeginInvoke(mDisconnectedHandler);
         }
@@ -675,7 +666,7 @@ namespace Imager
         /// <summary>
         /// Reaction to device disconnected event: stop streaming, close device connection.
         /// </summary>
-        private void OnDisconnected()
+        void OnDisconnected()
         {
             MessageBox.Show("Connection to device lost.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -686,7 +677,6 @@ namespace Imager
         void StartAcquisition()
         {
             var lPayloadSize = mDevice.PayloadSize;
-
             // Propagate to pipeline to make sure buffers are big enough
             mPipeline.BufferSize = lPayloadSize;
             mPipeline.Reset();
@@ -740,7 +730,7 @@ namespace Imager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void modeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        void modeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Nothing selected? Unexpected, just do nothing...
             if (modeComboBox.SelectedIndex < 0)
@@ -768,7 +758,12 @@ namespace Imager
             }
         }
 
-        string RecordPath()
+        /// <summary>
+        /// Use the path from recorder if valid(Not NullOrEmpty), otherwise use the path from UI
+        /// in "DataDir/RecordName/RecordName"
+        /// </summary>
+        /// <returns></returns>
+        string prepareRecordPath()
         {
             if (!string.IsNullOrEmpty(recorder.RecordPath))
             {
@@ -795,13 +790,14 @@ namespace Imager
 
         void SaveImage_Click(object sender, EventArgs e)
         {
-            var recordpath = RecordPath();
+            var recordpath = prepareRecordPath();
             if (string.IsNullOrEmpty(recordpath)) { return; }
 
             recorder.RecordPath = recordpath;
             recorder.DataFormat = (DataFormat)DataFormat.SelectedIndex;
             recorder.SaveCurrentImage(mDisplayThread);
-            recorder.ResetPath();
+            // set to invalid path so that "prepareRecordPath" would use path from UI again.
+            recorder.RecordPath = null;
         }
 
         void OnRecordChecked(bool check)
@@ -813,9 +809,10 @@ namespace Imager
         {
             if (Record.Checked)
             {
-                var recordpath = RecordPath();
+                var recordpath = prepareRecordPath();
                 if (string.IsNullOrEmpty(recordpath))
                 {
+                    // invalid path, just reset UI 
                     Record.CheckedChanged -= Record_CheckedChanged;
                     Record.Checked = false;
                     Record.CheckedChanged += Record_CheckedChanged;
@@ -832,18 +829,21 @@ namespace Imager
                     mDisplayThread.ResetStatistics();
                 }
 
+                recorder.Reset();
                 recorder.RecordPath = recordpath;
                 recorder.DataFormat = (DataFormat)DataFormat.SelectedIndex;
                 recorder.AvgBitrate = (uint)AvgBitRate.Value;
-                recorder.ResetCounter();
-                recorder.RecordStatus = RecordStatus.Recording;
+                // save *.meta file before recording starts
+                SaveMeta(recordpath);
+                recorder.StartStop(true);
                 Record.Text = "Stop Record";
             }
             else
             {
-                recorder.RecordStatus = RecordStatus.Stopped;
+                recorder.StartStop(false);
                 recorder.StopMP4();
-                OnRecordStopped();
+                recorder.Reset();
+                Record.Text = "Start Record";
             }
             EnableAcquisitionUI();
         }

@@ -5,10 +5,6 @@
 %   getRecordPathAsync
 %   setRecordPath
 %   setRecordPathAsync
-%   getRecordEpoch
-%   getRecordEpochAsync
-%   setRecordEpoch
-%   setRecordEpochAsync
 %   getDataFormat
 %   getDataFormatAsync
 %   setDataFormat
@@ -29,7 +25,7 @@
 %   uncheckedCast - Downcasts the given proxy to this type without contacting the remote server.
 
 % Copyright (c) ZeroC, Inc. All rights reserved.
-% Generated from ImagerCommand.ice by slice2matlab version 3.7.6
+% Generated from ImagerCommand.ice by slice2matlab version 3.7.9
 
 classdef CommandPrx < Ice.ObjectPrx
     methods
@@ -98,72 +94,6 @@ classdef CommandPrx < Ice.ObjectPrx
                 varargout{1} = result;
             end
             r_ = obj.iceInvokeAsync('setRecordPath', 0, true, os_, 1, @unmarshal, {}, varargin{:});
-        end
-        function result = getRecordEpoch(obj, varargin)
-            % getRecordEpoch
-            %
-            % Parameters:
-            %   context (containers.Map) - Optional request context.
-            %
-            % Returns (char)
-            
-            is_ = obj.iceInvoke('getRecordEpoch', 0, true, [], true, {}, varargin{:});
-            is_.startEncapsulation();
-            result = is_.readString();
-            is_.endEncapsulation();
-        end
-        function r_ = getRecordEpochAsync(obj, varargin)
-            % getRecordEpochAsync
-            %
-            % Parameters:
-            %   context (containers.Map) - Optional request context.
-            %
-            % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
-            
-            function varargout = unmarshal(is_)
-                is_.startEncapsulation();
-                result = is_.readString();
-                is_.endEncapsulation();
-                varargout{1} = result;
-            end
-            r_ = obj.iceInvokeAsync('getRecordEpoch', 0, true, [], 1, @unmarshal, {}, varargin{:});
-        end
-        function result = setRecordEpoch(obj, epoch, varargin)
-            % setRecordEpoch
-            %
-            % Parameters:
-            %   epoch (char)
-            %   context (containers.Map) - Optional request context.
-            %
-            % Returns (logical)
-            
-            os_ = obj.iceStartWriteParams([]);
-            os_.writeString(epoch);
-            obj.iceEndWriteParams(os_);
-            is_ = obj.iceInvoke('setRecordEpoch', 0, true, os_, true, {}, varargin{:});
-            is_.startEncapsulation();
-            result = is_.readBool();
-            is_.endEncapsulation();
-        end
-        function r_ = setRecordEpochAsync(obj, epoch, varargin)
-            % setRecordEpochAsync
-            %
-            % Parameters:
-            %   epoch (char)
-            %   context (containers.Map) - Optional request context.
-            %
-            % Returns (Ice.Future) - A future that will be completed with the results of the invocation.
-            
-            os_ = obj.iceStartWriteParams([]);
-            os_.writeString(epoch);
-            obj.iceEndWriteParams(os_);
-            function varargout = unmarshal(is_)
-                is_.startEncapsulation();
-                result = is_.readBool();
-                is_.endEncapsulation();
-                varargout{1} = result;
-            end
-            r_ = obj.iceInvokeAsync('setRecordEpoch', 0, true, os_, 1, @unmarshal, {}, varargin{:});
         end
         function result = getDataFormat(obj, varargin)
             % getDataFormat
