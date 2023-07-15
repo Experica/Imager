@@ -244,7 +244,13 @@ namespace Imager
         /// <param name="recordpath"></param>
         void SaveMeta(string recordpath)
         {
-            var metapath = $"{recordpath}.meta";
+            var metapath = recordpath + ".meta";
+            if (config.SaveMetaInParentDir)
+            {
+                var dir = Path.GetDirectoryName(metapath);
+                var file = Path.GetFileName(metapath);
+                metapath = Path.Combine(Path.GetDirectoryName(dir), file);
+            }
             if (File.Exists(metapath)) { return; }
 
             UpdateToConfig();
@@ -254,8 +260,8 @@ namespace Imager
             var datadir = config.DataDir;
             var recordname = config.RecordName;
             config.ColorMap = null;
-            config.DataDir = Path.GetDirectoryName(recordpath);
-            config.RecordName = Path.GetFileNameWithoutExtension(recordpath);
+            config.DataDir = Path.GetDirectoryName(metapath);
+            config.RecordName = Path.GetFileNameWithoutExtension(metapath);
 
             metapath.WriteYamlFile(config);
 

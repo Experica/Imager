@@ -39,6 +39,7 @@ namespace Imager
         public uint DisplayTargetFPS { get; set; } = 60;
         public bool StopDisplayWhenRecord { get; set; } = false;
         public bool ResetStatisticsWhenRecord { get; set; } = true;
+        public bool SaveMetaInParentDir { get; set; } = true;
         /// <summary>
         /// Increasing the buffer count can make streaming more tolerant to missing block IDs, 
         /// but at the expense of using more memory and increasing latency.
