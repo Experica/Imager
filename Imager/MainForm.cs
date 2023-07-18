@@ -701,6 +701,7 @@ namespace Imager
             // Raise priority when acquisiting
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
+            mDisplayThread.Priority = PvThreadPriority.Highest;
 
             // Use acquisition manager to send the acquisition start command to the device
             mAcquisitionManager.Start();
@@ -714,6 +715,7 @@ namespace Imager
             // Normal priority when stopped acquisiting
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
+            mDisplayThread.Priority = PvThreadPriority.Normal;
         }
 
         void communicationButton_Click(object sender, EventArgs e)

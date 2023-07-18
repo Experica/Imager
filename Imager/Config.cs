@@ -36,7 +36,7 @@ namespace Imager
         public string ServerAddress { get; set; } = "LocalHost";
         public ushort ServerPort { get; set; } = 10000;
         public bool DisplayVSync { get; set; } = false;
-        public uint DisplayTargetFPS { get; set; } = 60;
+        public uint DisplayTargetFPS { get; set; } = 1000;
         public bool StopDisplayWhenRecord { get; set; } = false;
         public bool ResetStatisticsWhenRecord { get; set; } = true;
         public bool SaveMetaInParentDir { get; set; } = true;
@@ -47,7 +47,7 @@ namespace Imager
         /// Applications using low frame rates or using very large buffers are not as sensitive to missing block IDs and 
         /// can thus save memory and latency by only using 4 or 8 buffers.
         /// </summary>
-        public uint BufferCount { get; set; } = 16;
+        public uint BufferCount { get; set; } = 20;
         /// <summary>
         /// If enabled, buffers are automatically resized by the acquisition pipeline 
         /// when the BUFFER_TOO_SMALL operation result is returned.
