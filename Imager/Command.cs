@@ -20,6 +20,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
+using System.Threading;
 using Ice;
 
 namespace Imager
@@ -122,7 +123,9 @@ namespace Imager
         }
         public override bool StopAcquisiteAndRecord(Current current = null)
         {
-            return setIsAcquisiting(false) && setIsRecording(false);
+            var hr = setIsAcquisiting(false);
+            Thread.Sleep((int)(mainform.config.PipelineDuration() * 1000));
+            return hr && setIsRecording(false);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Imager
 
         public readonly Recorder recorder = new Recorder();
         const string configpath = "Config.yaml";
-        Config config;
+        public Config config;
         Communicator communicator;
         bool iscolormap = false;
         bool isdisplay = true;

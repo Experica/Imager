@@ -60,6 +60,15 @@ namespace Imager
         /// List of 256 colors with 8 bits per R/G/B channel
         /// </summary>
         public byte[][] ColorMap { get; set; } = null;
+
+        /// <summary>
+        /// Duration of fully buffered pipeline
+        /// </summary>
+        /// <returns>Seconds</returns>
+        public double PipelineDuration()
+        {
+            return BufferCount / AcquisitionControl.AcquisitionFrameRate;
+        }
     }
 
     public class ImageFormat
