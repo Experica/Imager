@@ -543,7 +543,7 @@ namespace Imager
 
         void DisplayThread_OnBufferDisplay(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
         {
-            if (aBuffer == null || !isdisplay) { return; }
+            if (!isdisplay) { return; }
 
             if (iscolormap && config.ColorMap != null)
             {
@@ -574,7 +574,10 @@ namespace Imager
 
         void DisplayThread_OnBufferDone(PvDisplayThread aDisplayThread, PvBuffer aBuffer)
         {
-            recorder.RecordImage(aBuffer);
+            if (recorder.RecordImage(aBuffer))
+            {
+                recorder.PipelineQueueSize = mPipeline.OutputQueueSize;
+            }
         }
 
         /// <summary>

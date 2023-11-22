@@ -20,6 +20,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
 OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
+using System.Diagnostics;
 using System.Threading;
 using Ice;
 
@@ -29,8 +30,9 @@ namespace Imager
     {
         MainForm mainform;
         int timeout;
+        Stopwatch timer = new Stopwatch();
 
-        public CommandI(MainForm form, int timeout_millisecond = 1000)
+        public CommandI(MainForm form, int timeout_millisecond = 2000)
         {
             mainform = form;
             timeout = timeout_millisecond;
@@ -91,7 +93,7 @@ namespace Imager
         {
             try
             {
-                var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacquisiting);
+                var ar = mainform.BeginInvoke(mainform.mPlayCheckedHandler, isacquisiting); // click play button
                 ar.AsyncWaitHandle.WaitOne(timeout);
                 return ar.IsCompleted;
             }
@@ -110,7 +112,7 @@ namespace Imager
         {
             try
             {
-                var ar = mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording);
+                var ar = mainform.BeginInvoke(mainform.mRecordCheckedHandler, isrecording); // click record button
                 ar.AsyncWaitHandle.WaitOne(timeout);
                 return ar.IsCompleted;
             }
@@ -123,8 +125,18 @@ namespace Imager
         }
         public override bool StopAcquisiteAndRecord(Current current = null)
         {
+            var tout = mainform.config.PipelineDuration();
+            mainform.recorder.PipelineQueueSize = 1;
             var hr = setIsAcquisiting(false);
-            Thread.Sleep((int)(mainform.config.PipelineDuration() * 1000));
+
+            timer.Restart();
+            // wait for pipeline buffers recorded
+            while (mainform.recorder.PipelineQueueSize > 0 && timer.Elapsed.TotalSeconds < tout)
+            {
+                Thread.Sleep(5);
+            }
+            timer.Stop();
+
             return hr && setIsRecording(false);
         }
     }

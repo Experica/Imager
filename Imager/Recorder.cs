@@ -53,6 +53,7 @@ namespace Imager
         uint imageWritten = 0;
         RecordStatus recordStatus = RecordStatus.None;
 
+        public uint PipelineQueueSize;
         public DataFormat DataFormat = DataFormat.TIFF;
         public string RecordPath = null;
         public uint AvgBitrate
